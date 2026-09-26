@@ -331,13 +331,11 @@
   /* ---------- TESTIMONIALS ---------- */
   #testimonials{background:var(--bg-alt);}
   .test-track{
-    display:flex;gap:1.4rem;overflow-x:auto;
-    scroll-snap-type:x mandatory;padding-bottom:1rem;
+    display:flex;flex-wrap:wrap;justify-content:center;gap:1.4rem;
+    padding-bottom:1rem;
   }
-  .test-track::-webkit-scrollbar{height:4px;}
-  .test-track::-webkit-scrollbar-thumb{background:var(--orange);}
   .test-card{
-    flex:0 0 min(380px,84vw);scroll-snap-align:start;
+    flex:0 0 min(380px,100%);
     background:var(--bg-card);border:1px solid var(--line);
     padding:2rem;border-radius:4px;
     opacity:0;transform:translateY(24px);
@@ -1159,37 +1157,17 @@ function animateSteps(){
   });
 }
 
-/* ============ TESTIMONIALS (marquee) ============ */
+/* ============ TESTIMONIALS (grid — se muestran TODAS, sin carrusel que oculte la mayoría) ============ */
 function animateTestimonials(){
   const track = document.getElementById('test-track');
-  const cards = track.querySelectorAll('.test-card').length;
-  // Con pocas reseñas (0, 1 o 2) no tiene sentido un carrusel infinito: se muestran quietas.
-  if(cards < 3){
-    track.style.display='flex';
-    track.style.flexWrap='wrap';
-    track.style.justifyContent='center';
-    gsap.set('.test-card',{opacity:1,y:0});
-    return;
-  }
-  // duplicate cards for seamless loop (hay que hacerlo ANTES de mostrarlas, si no las tarjetas
-  // originales quedan huérfanas fuera del DOM y la animación nunca se ve)
-  const originalHTML = track.innerHTML;
-  track.innerHTML = originalHTML + originalHTML;
+  // Se muestran todas las reseñas a la vez, en cuadrícula: en móvil una debajo de otra bajando la
+  // página, en pantallas grandes varias por fila. Así se ve la cantidad real de reseñas (más
+  // credibilidad) en vez de esconder la mayoría detrás de un carrusel que solo enseña 1 o 3 a la vez.
   track.style.display='flex';
-  track.style.overflow='hidden';
-  // Se muestran de una vez, sin esperar a que el usuario haga scroll: así nunca quedan invisibles,
-  // sea que se entre por el menú (#testimonials directo) o bajando normal por la página.
+  track.style.flexWrap='wrap';
+  track.style.justifyContent='center';
+  track.style.overflow='visible';
   gsap.set('.test-card',{opacity:1,y:0});
-
-  let tween;
-  requestAnimationFrame(()=>{
-    const totalWidth = track.scrollWidth/2;
-    tween = gsap.to(track,{
-      x:-totalWidth,duration:26,ease:'none',repeat:-1
-    });
-  });
-  track.addEventListener('mouseenter',()=>tween && tween.pause());
-  track.addEventListener('mouseleave',()=>tween && tween.resume());
 }
 
 // Trae las reseñas reales guardadas en la hoja "Resenas" (solo las que están "Publicada"; si una no
@@ -1206,7 +1184,7 @@ async function loadResenas(){
       const stars = '★'.repeat(n) + '☆'.repeat(5 - n);
       return `<div class="test-card"><div class="stars">${stars}</div><p>"${escHtml(r.comentario)}"</p><div class="who">${escHtml(r.nombre)}<span>Comprador verificado</span></div></div>`;
     };
-    track.innerHTML = rows.slice(0, 16).map(card).join('');
+    track.innerHTML = rows.map(card).join(''); // todas las reseñas (el backend ya limita a las 40 más recientes)
   }catch(e){ console.warn('Reseñas no disponibles', e); }
 }
 
