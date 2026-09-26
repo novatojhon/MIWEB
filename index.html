@@ -139,6 +139,76 @@
   header#nav nav a:hover{opacity:1;color:var(--orange-light);}
   @media(max-width:768px){ header#nav nav{display:none;} }
 
+  /* ===== Menú flotante móvil ===== */
+  #mobile-menu-btn{
+    display:none;
+    position:fixed;
+    right:1.2rem; bottom:1.2rem;
+    z-index:999;
+    width:56px; height:56px;
+    border-radius:50%;
+    background:var(--orange);
+    align-items:center; justify-content:center;
+    box-shadow:0 8px 24px rgba(255,106,26,.45);
+    cursor:pointer;
+    border:none;
+  }
+  #mobile-menu-btn span{
+    position:relative;
+    width:22px; height:2px;
+    background:#0a0a0b;
+    display:block;
+    transition:transform .3s ease, opacity .3s ease;
+  }
+  #mobile-menu-btn span::before,#mobile-menu-btn span::after{
+    content:'';
+    position:absolute; left:0;
+    width:22px; height:2px;
+    background:#0a0a0b;
+    transition:transform .3s ease;
+  }
+  #mobile-menu-btn span::before{top:-7px;}
+  #mobile-menu-btn span::after{top:7px;}
+  #mobile-menu-btn.open span{background:transparent;}
+  #mobile-menu-btn.open span::before{transform:translateY(7px) rotate(45deg);}
+  #mobile-menu-btn.open span::after{transform:translateY(-7px) rotate(-45deg);}
+
+  #mobile-menu-panel{
+    position:fixed;
+    inset:0;
+    background:rgba(10,10,11,.97);
+    backdrop-filter:blur(6px);
+    z-index:998;
+    display:flex;
+    flex-direction:column;
+    align-items:center;
+    justify-content:center;
+    gap:1.6rem;
+    opacity:0; visibility:hidden;
+    transform:translateY(12px);
+    transition:opacity .35s ease, transform .35s ease, visibility .35s;
+  }
+  #mobile-menu-panel.open{opacity:1; visibility:visible; transform:translateY(0);}
+  #mobile-menu-panel a{
+    font-family:var(--font-display);
+    text-transform:uppercase;
+    letter-spacing:.12em;
+    font-size:1.3rem;
+    color:var(--text);
+    opacity:.9;
+  }
+  #mobile-menu-panel a:hover, #mobile-menu-panel a:active{color:var(--orange-light); opacity:1;}
+  #mobile-menu-panel .logo-mini{
+    position:absolute; top:2rem; left:50%; transform:translateX(-50%);
+    font-family:var(--font-display); text-transform:uppercase; letter-spacing:.1em;
+    font-size:.9rem; color:var(--text-dim);
+  }
+  #mobile-menu-panel .logo-mini span{color:var(--orange);}
+
+  @media(max-width:768px){
+    #mobile-menu-btn{display:flex;}
+  }
+
   /* ---------- HERO ---------- */
   #hero{
     position:relative;
@@ -663,6 +733,16 @@
     <a href="#contact">Contacto</a>
   </nav>
 </header>
+
+<button id="mobile-menu-btn" aria-label="Abrir menú"><span></span></button>
+<nav id="mobile-menu-panel">
+  <div class="logo-mini">JHON<span>CLOCK</span></div>
+  <a href="#catalog">Catálogo</a>
+  <a href="#quiz">Quiz</a>
+  <a href="#testimonials">Reseñas</a>
+  <a href="#vendedores">Vendedores</a>
+  <a href="#contact">Contacto</a>
+</nav>
 
 <section id="hero">
   <video id="hero-video" autoplay muted loop playsinline></video>
@@ -1442,6 +1522,24 @@ function vendedores(){
   });
   wire('form-registro','registro'); wire('form-login','login');
 }
+
+/* ============ MENÚ FLOTANTE MÓVIL ============ */
+(function(){
+  const btn = document.getElementById('mobile-menu-btn');
+  const panel = document.getElementById('mobile-menu-panel');
+  if(!btn || !panel) return;
+  const toggle = ()=>{
+    btn.classList.toggle('open');
+    panel.classList.toggle('open');
+    document.body.style.overflow = panel.classList.contains('open') ? 'hidden' : '';
+  };
+  btn.addEventListener('click', toggle);
+  panel.querySelectorAll('a').forEach(a=>a.addEventListener('click', ()=>{
+    btn.classList.remove('open');
+    panel.classList.remove('open');
+    document.body.style.overflow = '';
+  }));
+})();
 
 /* ============ INIT ============ */
 window.addEventListener('load', async ()=>{
