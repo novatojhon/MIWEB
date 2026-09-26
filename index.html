@@ -1328,13 +1328,19 @@ function chronoDial(){
 
 /* ============ CONTACT FORM ============ */
 function contactForm(){
-  document.getElementById('contact-form').addEventListener('submit',e=>{
+  document.getElementById('contact-form').addEventListener('submit', async e=>{
     e.preventDefault();
     const f = e.target;
+    const btn = f.querySelector('button[type="submit"]') || f.querySelector('button');
+    if(!apiOn()){ alert('Falta conectar el servidor: pega la URL del script en API_URL.'); return; }
     const name = f.name.value, email=f.email.value, phone=f.phone.value, msg=f.message.value;
-    const subject = encodeURIComponent('Consulta desde JhonClock — '+name);
-    const body = encodeURIComponent(`Nombre: ${name}\nCorreo: ${email}\nTeléfono: ${phone}\n\nMensaje:\n${msg}`);
-    window.location.href = `mailto:cibersport33@gmail.com?subject=${subject}&body=${body}`;
+    if(btn) btn.disabled = true;
+    try{
+      const d = await post({action:'contacto', name, email, phone, msg});
+      if(d.error){ alert(d.error); }
+      else { alert('¡Mensaje enviado! Te responderemos pronto.'); f.reset(); }
+    }catch(err){ alert('No se pudo enviar. Revisa tu internet e inténtalo de nuevo.'); }
+    if(btn) btn.disabled = false;
   });
 }
 
