@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://web-jhon.vercel.app/sitemap.xml
