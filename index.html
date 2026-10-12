@@ -957,7 +957,8 @@
   /* portada: la palabra en cursiva ya no se corta, y el título cabe en pantallas bajas */
   #hero h1 .split-word{padding:0 .08em .16em 0;margin:0 -.08em -.16em 0}
   #hero h1 .split-word.accent{padding:0 .22em .24em .04em;margin:0 -.22em -.24em -.04em}
-  #hero h1 .split-word.accent span{line-height:1.05;font-size:1.06em}
+  #hero h1 .split-word.accent span{line-height:1.05;font-size:1.06em;padding-right:.08em}
+  #hero h1.done .split-word{overflow:visible}
   #hero h1{font-size:clamp(2.8rem,min(8.2vw,11.5vh),6.6rem)}
   #hero .hero-content{padding-top:5.5rem}
   body.has-bar #hero .hero-content{padding-top:7.5rem}
@@ -973,6 +974,8 @@
   #preloader .pl-msg .a b .w{background:linear-gradient(100deg,#ff6a1a,#ffb347 35%,#ff3d6e 70%,#ff6a1a);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:tinte 3s linear infinite}
   #preloader .pl-msg .w{display:inline-block;opacity:0;transform:translateY(.45em);filter:blur(6px)}
   @media(max-width:480px){#preloader .pl-msg .q{font-size:.6rem;letter-spacing:.16em}#preloader .pl-stage{width:min(70vw,440px);margin-top:-6vh}}
+  #preloader .pl-skip{position:absolute;bottom:calc(9% + 14px);left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.32);z-index:3;white-space:nowrap}
+  #preloader{cursor:pointer}
 </style>
 </head>
 <body>
@@ -994,6 +997,7 @@
     <div class="pl-msg" id="pl-msg"><span class="q">¿Eres amante de los relojes?</span><span class="a">Llegaste al <b>lugar correcto.</b></span></div>
   </div>
   <div class="bar-wrap"><div class="bar"></div></div>
+  <div class="pl-skip">Toca para entrar</div>
 </div>
 
 <button type="button" id="offer-bar" aria-label="Ver relojes en oferta"><span class="ob-dot"></span><b>OFERTA</b><span class="ob-label">termina en</span><span class="ob-time" id="ob-time">--</span><span class="ob-go">Ver ofertas →</span></button>
@@ -1375,8 +1379,8 @@ function flapLetters(){
   document.querySelectorAll('#pl-brand .ch').forEach((el,i)=>{
     setTimeout(()=>{
       el.classList.add('on','spin'); let n=0; const fin=el.dataset.c;
-      const t=setInterval(()=>{ el.textContent = pool[Math.floor(Math.random()*pool.length)]; if(++n>5){ clearInterval(t); el.textContent=fin; el.classList.remove('spin'); } }, 38);
-    }, 90*i);
+      const t=setInterval(()=>{ el.textContent = pool[Math.floor(Math.random()*pool.length)]; if(++n>6){ clearInterval(t); el.textContent=fin; el.classList.remove('spin'); } }, 60);
+    }, 160*i);
   });
 }
 function runTime(ms){
@@ -1387,21 +1391,29 @@ function runTime(ms){
 }
 function runPreloader(){
   buildIntro(); splitMsg();
+  // la primera vez se ve completa (unos 6 s); si el cliente vuelve en la misma visita, va 3 veces más rápido.
+  // Tocando la pantalla se puede saltar.
+  let visto=false; try{ visto = sessionStorage.getItem('jc_intro')==='1'; sessionStorage.setItem('jc_intro','1'); }catch(e){}
   return new Promise(resolve=>{
     const tl = gsap.timeline({onComplete:resolve});
-    tl.to('#preloader .mask',{clipPath:'circle(150% at 50% 50%)',duration:.7,ease:'power3.inOut'})
-      .to('#preloader .pl-ticks line',{opacity:1,duration:.02,stagger:.008},'-=.55')
-      .to('#preloader .pl-arc',{strokeDashoffset:0,duration:1.1,ease:'power2.inOut'},'<')
-      .fromTo('#preloader .pl-hand',{rotation:0},{rotation:360,duration:1.1,ease:'power2.inOut',svgOrigin:'100 100'},'<')
-      .to('#preloader .pl-hand',{opacity:0,duration:.35,ease:'power1.out'},'>-.15')
-      .add(()=>{ flapLetters(); runTime(900); },'<-.8')
-      .to('#preloader .pl-meta',{opacity:1,duration:.4},'<.5')
-      .to('#preloader .bar',{width:'100%',duration:1.9,ease:'power1.inOut'},'<-.4')
-      .to('#pl-msg .q .w',{opacity:1,y:0,filter:'blur(0px)',duration:.35,stagger:.06,ease:'power2.out'},1.15)
-      .to('#pl-msg .a .w',{opacity:1,y:0,filter:'blur(0px)',duration:.5,stagger:.11,ease:'power3.out'},'>-.05')
-      .to('#preloader .pl-stage',{scale:1.12,opacity:0,duration:.45,ease:'power2.in'},'+=.7')
-      .to('#preloader',{clipPath:'circle(0% at 50% 50%)',duration:.55,ease:'power3.inOut'},'-=.15')
+    tl.to('#preloader .mask',{clipPath:'circle(150% at 50% 50%)',duration:.9,ease:'power3.inOut'})
+      .to('#preloader .pl-ticks line',{opacity:1,duration:.03,stagger:.02},.25)
+      .to('#preloader .pl-arc',{strokeDashoffset:0,duration:1.8,ease:'power2.inOut'},.3)
+      .fromTo('#preloader .pl-hand',{rotation:0},{rotation:360,duration:1.8,ease:'power2.inOut',svgOrigin:'100 100'},.3)
+      .to('#preloader .pl-hand',{opacity:0,duration:.4,ease:'power1.out'},2.0)
+      .add(()=>{ flapLetters(); runTime(1600); },.6)
+      .to('#preloader .pl-meta',{opacity:1,duration:.6},1.2)
+      .to('#preloader .bar',{width:'100%',duration:4.1,ease:'power1.inOut'},.4)
+      .to('#pl-msg .q .w',{opacity:1,y:0,filter:'blur(0px)',duration:.5,stagger:.12,ease:'power2.out'},2.4)
+      .to('#pl-msg .a .w',{opacity:1,y:0,filter:'blur(0px)',duration:.7,stagger:.22,ease:'power3.out'},3.2)
+      .to('#preloader .pl-stage',{scale:1.1,opacity:0,duration:.5,ease:'power2.in'},'+=1.1')
+      .to('#preloader',{clipPath:'circle(0% at 50% 50%)',duration:.6,ease:'power3.inOut'},'-=.2')
       .set('#preloader',{display:'none'});
+    if(visto) tl.timeScale(3);
+    const pl=document.getElementById('preloader');
+    const saltar=()=>{ if(tl.progress()<.85) tl.timeScale(4); };
+    pl.addEventListener('click',saltar,{once:true});
+    pl.addEventListener('touchstart',saltar,{once:true,passive:true});
   });
 }
 
@@ -1428,7 +1440,8 @@ function buildHero(){
   tl.to(eyebrowSpans,{y:0,duration:.7,ease:'power3.out',stagger:.03})
     .to(titleSpans,{y:0,duration:.9,ease:'power4.out',stagger:.045},'-=.4')
     .to('#hero-sub',{opacity:1,duration:.7,ease:'power2.out'},'-=.4')
-    .to('#hero-actions',{opacity:1,duration:.7,ease:'power2.out'},'-=.5');
+    .to('#hero-actions',{opacity:1,duration:.7,ease:'power2.out'},'-=.5')
+    .add(()=>document.getElementById('hero-title').classList.add('done'));
 }
 
 /* ============ SECONDARY VIDEOS ============ */
