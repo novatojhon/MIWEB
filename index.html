@@ -971,6 +971,63 @@
      (la "g", la "n", el punto). Este margen invisible le da espacio para que no se vea cortada. */
   #hero h1 .split-word.accent span,h1 em,h2 em,#preloader .in-a b .w{padding:.06em .2em .24em .14em;margin:-.06em -.2em -.24em -.14em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
   #hero h1 .split-word.accent span{display:inline-block}
+
+  /* ===== Precio en bolívares ===== */
+  .bs{display:block;font-family:var(--font-mono);font-weight:500;font-size:.68rem;letter-spacing:.02em;color:var(--text-dim);margin-top:.2rem;font-variant-numeric:tabular-nums}
+  .modal-body .bs{font-size:.85rem;margin:-.6rem 0 1rem}
+  #cart .tot .bs{display:block;text-align:right;font-size:.72rem}
+  /* ===== Contador de relojes entregados ===== */
+  #trust .item.count .t{font-family:var(--font-display);font-weight:800;font-size:1.35rem;letter-spacing:.02em;color:var(--orange-light);text-transform:none}
+  /* ===== Avísame ===== */
+  .notify-btn{flex:none;height:34px;padding:0 .7rem;border-radius:20px;border:1px dashed var(--orange);background:transparent;color:var(--orange-light);font-family:var(--font-mono);font-size:.6rem;font-weight:500;letter-spacing:.06em;text-transform:uppercase;cursor:pointer}
+  .notify-btn:hover{background:var(--orange);color:#0a0a0b}
+  .mini-modal{position:fixed;inset:0;z-index:1003;background:rgba(0,0,0,.78);display:none;align-items:center;justify-content:center;padding:1.2rem}
+  .mini-modal.open{display:flex}
+  .mini-box{position:relative;width:min(440px,100%);background:var(--bg-card);border:1px solid var(--line);border-radius:6px;padding:1.8rem 1.6rem}
+  .mini-box h3{font-size:1.8rem;line-height:.95;margin-bottom:.4rem}
+  .mini-box .sub{color:var(--text-dim);font-size:.88rem;margin-bottom:1.2rem}
+  .mini-box label{display:block;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin:.9rem 0 .35rem}
+  .mini-box input[type=text],.mini-box input[type=tel]{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--text);font-family:var(--font-body);font-size:1rem;padding:.6rem 0;outline:none}
+  .mini-box input:focus{border-color:var(--orange)}
+  .mini-box .btn{width:100%;justify-content:center;margin-top:1.4rem}
+  .mini-box .note{font-size:.74rem;color:var(--text-dim);margin-top:.8rem;text-align:center}
+  .mini-x{position:absolute;top:.5rem;right:.8rem;background:none;border:0;color:var(--text);font-size:1.6rem;cursor:pointer}
+  /* ===== Guía de talla ===== */
+  .size-btn{display:inline-flex;align-items:center;gap:.5rem;background:transparent;border:1px solid rgba(255,106,26,.55);color:var(--orange-light);border-radius:30px;padding:.8rem 1.1rem;font-family:var(--font-mono);font-size:.7rem;letter-spacing:.06em;text-transform:uppercase;cursor:pointer;white-space:nowrap}
+  .size-btn svg{width:16px;height:16px}
+  .size-btn:hover{background:rgba(255,106,26,.12)}
+  @media(max-width:760px){.size-btn{flex:1 1 100%;justify-content:center}}
+  .size-chip{display:inline-flex;align-items:center;gap:.4rem;margin-left:.6rem;padding:.2rem .6rem;border-radius:20px;background:rgba(255,106,26,.15);color:var(--orange-light);font-size:.72rem;cursor:pointer;border:0;font-family:var(--font-mono)}
+  .talla-vis{display:flex;align-items:center;justify-content:center;height:150px;margin:.6rem 0 .4rem}
+  .talla-vis .dial{border-radius:50%;border:3px solid var(--orange);box-shadow:0 0 0 6px rgba(255,106,26,.08),inset 0 0 18px rgba(255,106,26,.25);display:flex;align-items:center;justify-content:center;font-family:var(--font-display);font-weight:800;color:var(--text);transition:width .3s,height .3s}
+  .talla-res{text-align:center;font-family:var(--font-body);font-size:1rem;line-height:1.5}
+  .talla-res b{font-family:var(--font-display);font-size:1.6rem;color:var(--orange-light);letter-spacing:.02em}
+  .mini-box input[type=range]{width:100%;accent-color:var(--orange);margin-top:.4rem}
+  .wrist-val{font-family:var(--font-display);font-weight:800;font-size:1.3rem;color:var(--text);float:right;letter-spacing:.02em}
+  /* ===== Pagos y envíos ===== */
+  #pagos .pay-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:.5rem}
+  #pagos .pay{background:var(--bg-card);border:1px solid var(--line);border-radius:6px;padding:1.5rem 1.4rem;position:relative;overflow:hidden}
+  #pagos .pay::after{content:'';position:absolute;inset:auto -30% -60% auto;width:160px;height:160px;border-radius:50%;background:radial-gradient(circle,rgba(255,106,26,.16),transparent 70%)}
+  #pagos .pay svg{width:30px;height:30px;stroke:var(--orange);margin-bottom:.9rem}
+  #pagos .pay h3{font-size:1.5rem;margin-bottom:.45rem}
+  #pagos .pay p{color:var(--text-dim);font-size:.9rem;line-height:1.55}
+  #pagos .ship-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:1rem}
+  #pagos .ship{display:flex;gap:.9rem;align-items:flex-start;padding:1.2rem 1.3rem;border:1px dashed rgba(255,255,255,.14);border-radius:6px}
+  #pagos .ship svg{width:24px;height:24px;flex:none;stroke:var(--orange-light)}
+  #pagos .ship b{display:block;font-family:var(--font-display);font-weight:700;font-size:1.1rem;letter-spacing:.02em;text-transform:uppercase;margin-bottom:.2rem}
+  #pagos .ship span{color:var(--text-dim);font-size:.86rem;line-height:1.5}
+  #pagos .tasa-hoy{display:inline-flex;gap:.6rem;align-items:center;margin-top:1.4rem;font-family:var(--font-mono);font-size:.74rem;letter-spacing:.08em;text-transform:uppercase;color:var(--text-dim)}
+  #pagos .tasa-hoy b{color:var(--orange-light);font-weight:500}
+  @media(max-width:860px){#pagos .pay-grid,#pagos .ship-grid{grid-template-columns:1fr}}
+  /* ===== Foto que se mueve ===== */
+  #modal-img .gal-main{overflow:hidden;cursor:zoom-in;touch-action:pan-y;--sx:50%;--sy:50%}
+  #modal-img .gal-main.zoom{cursor:zoom-out}
+  #modal-img .gal-main img{transition:transform .18s ease-out;will-change:transform;animation:vaiven 7s ease-in-out infinite}
+  #modal-img .gal-main.touched img{animation:none}
+  #modal-img .gal-main::after{content:'';position:absolute;inset:0;pointer-events:none;background:radial-gradient(circle at var(--sx) var(--sy),rgba(255,255,255,.22),transparent 45%);mix-blend-mode:soft-light}
+  @keyframes vaiven{0%,100%{transform:perspective(900px) rotateY(-7deg) rotateX(2deg) scale(1.02)}50%{transform:perspective(900px) rotateY(7deg) rotateX(-2deg) scale(1.02)}}
+  .gal-hint{position:absolute;left:50%;bottom:.7rem;transform:translateX(-50%);z-index:2;background:rgba(10,10,11,.75);color:#fff;border-radius:20px;padding:.35rem .8rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;pointer-events:none;transition:opacity .4s}
+  .gal-main.touched .gal-hint{opacity:0}
 </style>
 </head>
 <body>
@@ -1034,6 +1091,8 @@
 
 <section id="trust">
   <div class="trust-line"></div>
+  <div class="item count" id="trust-count" hidden><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M20 7 9 18l-5-5"/></svg>
+    <div><div class="t"><span id="cnt-num">0</span> <span id="cnt-txt">relojes entregados</span></div><div class="d">Clientes felices en Venezuela</div></div></div>
   <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z"/></svg>
     <div><div class="t">Garantía 30 Dias</div><div class="d">Contra defectos de fábrica</div></div></div>
   <div class="item"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.5"><path d="M3 3v18h18"/><path d="M7 15l4-4 3 3 6-6"/></svg>
@@ -1053,6 +1112,7 @@
     <label class="cat-search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="cat-search" type="search" placeholder="Buscar marca o modelo…" autocomplete="off" aria-label="Buscar reloj"></label>
     <select id="cat-strap" class="cat-select" aria-label="Tipo de correa"><option value="all">Toda correa</option></select>
     <select id="cat-sort" class="cat-select" aria-label="Ordenar"><option value="rec">Recomendados</option><option value="asc">Menor precio</option><option value="desc">Mayor precio</option></select>
+    <button type="button" class="size-btn" id="size-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="6"/><path d="M12 3v3M12 18v3M9 9l3 3"/></svg>¿Qué tamaño me queda?</button>
   </div>
   <div class="filters" id="filters"><button class="filter-btn active" data-filter="all">Todos</button></div>
   <p class="cat-count" id="cat-count"></p>
@@ -1171,6 +1231,24 @@
   </div>
 </section>
 
+<section id="pagos" class="section">
+  <div class="section-head">
+    <div class="eyebrow">Pagos y envíos</div>
+    <h2>Paga como prefieras, <em>recíbelo</em> seguro.</h2>
+  </div>
+  <div class="pay-grid">
+    <div class="pay"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="6" y="2" width="12" height="20" rx="2.5"/><path d="M10 18h4"/></svg><h3>Pago móvil</h3><p>Pagas en bolívares a la tasa del día. Te enviamos los datos por WhatsApp al confirmar tu pedido.</p></div>
+    <div class="pay"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="m12 3 3 3-3 3-3-3zM6 9l3 3-3 3-3-3zM18 9l3 3-3 3-3-3zM12 15l3 3-3 3-3-3z"/></svg><h3>Binance</h3><p>Paga en USDT desde tu cuenta de Binance. Rápido, seguro y sin comisiones entre usuarios.</p></div>
+    <div class="pay"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><rect x="2" y="6" width="20" height="12" rx="2"/><circle cx="12" cy="12" r="2.5"/><path d="M6 12h.01M18 12h.01"/></svg><h3>Efectivo</h3><p>En dólares, al momento de la entrega personal. Revisa tu reloj y paga en el acto.</p></div>
+  </div>
+  <div class="ship-grid">
+    <div class="ship"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M3 7h11v9H3zM14 10h4l3 3v3h-7"/><circle cx="7" cy="17.5" r="1.6"/><circle cx="17" cy="17.5" r="1.6"/></svg><div><b>Envíos a todo el país</b><span>Por encomienda, empacado y protegido. Te pasamos el número de guía.</span></div></div>
+    <div class="ship"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 21s-7-6.2-7-11a7 7 0 0 1 14 0c0 4.8-7 11-7 11z"/><circle cx="12" cy="10" r="2.5"/></svg><div><b>Entrega personal</b><span>Coordinamos punto de entrega en tu zona. Consúltanos por WhatsApp.</span></div></div>
+    <div class="ship"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z"/><path d="m9 12 2 2 4-4"/></svg><div><b>Garantía 30 días</b><span>Contra defectos de fábrica. Tu compra está respaldada.</span></div></div>
+  </div>
+  <div class="tasa-hoy" id="tasa-hoy" hidden>Tasa de hoy: <b id="tasa-num"></b> por dólar</div>
+</section>
+
 <section id="testimonials" class="section">
   <div class="section-head">
     <div class="eyebrow">Reseñas</div>
@@ -1265,6 +1343,27 @@
 
 <div class="modal" id="modal"><div class="modal-box"><button class="modal-x" aria-label="Cerrar">×</button><div id="modal-img"></div><div class="modal-body" id="modal-body"></div></div></div>
 
+<div class="mini-modal" id="aviso" role="dialog" aria-modal="true" aria-labelledby="aviso-t"><div class="mini-box">
+  <button type="button" class="mini-x" data-close aria-label="Cerrar">×</button>
+  <h3 id="aviso-t">Te avisamos cuando <em>llegue.</em></h3>
+  <div class="sub" id="aviso-prod"></div>
+  <form id="aviso-form" novalidate>
+    <label for="av-nombre">Tu nombre</label><input type="text" id="av-nombre" name="nombre" autocomplete="name" required>
+    <label for="av-wa">Tu WhatsApp</label><input type="tel" id="av-wa" name="whatsapp" placeholder="0412 123 4567" autocomplete="tel" required>
+    <button type="submit" class="btn btn-fill">Avísame</button>
+    <div class="note">Solo te escribiremos para avisarte de este reloj.</div>
+  </form>
+</div></div>
+<div class="mini-modal" id="talla" role="dialog" aria-modal="true" aria-labelledby="talla-t"><div class="mini-box">
+  <button type="button" class="mini-x" data-close aria-label="Cerrar">×</button>
+  <h3 id="talla-t">¿Qué tamaño <em>me queda?</em></h3>
+  <div class="sub">Rodea tu muñeca con una cinta métrica (o un hilo y luego mídelo), justo debajo del hueso.</div>
+  <label for="wrist">Contorno de tu muñeca <span class="wrist-val" id="wrist-val">17 cm</span></label>
+  <input type="range" id="wrist" min="14" max="22" step="0.5" value="17">
+  <div class="talla-vis"><div class="dial" id="talla-dial">42</div></div>
+  <div class="talla-res" id="talla-res"></div>
+  <button type="button" class="btn btn-fill" id="talla-go">Ver relojes de mi talla</button>
+</div></div>
 <button id="cart-fab" type="button" aria-label="Ver carrito"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M6 6h15l-1.5 9h-12z"/><path d="M6 6 5 3H2"/><circle cx="9" cy="20" r="1.4"/><circle cx="18" cy="20" r="1.4"/></svg><b id="cart-count">0</b></button>
 <div id="cart" aria-hidden="true"><div class="bg"></div><div class="panel">
   <div class="head"><h3>Tu pedido</h3><button type="button" class="x" aria-label="Cerrar">×</button></div>
@@ -1470,9 +1569,9 @@ function cardHtml(p,i){
         <div class="cat">${escHtml(p.sub||p.catLabel)}</div>
         ${p.stock!=null?`<div class="stock${p.stock<=0?' out':''}">${stockTxt(p)}</div>`:''}
         <div class="price-row">
-          <div class="price">${enOferta(p)?`<span class="old">$${p.antes}</span>`:''}${p.price}</div>
+          <div class="price">${enOferta(p)?`<span class="old">$${p.antes}</span>`:''}${p.price}${bsTxt(priceNum(p))?`<span class="bs">${bsTxt(priceNum(p))}</span>`:''}</div>
           <div class="acts"><a class="cta" href="${waUrl(p)}" target="_blank" rel="noopener" data-sku="${p.sku||''}">Consultar</a>
-          <button class="add-cart${inCart(p.sku)?' in':''}" type="button" data-add="${i}" aria-label="Agregar al carrito" title="Agregar al carrito"${p.stock<=0?' disabled':''}>${ICON_CART}</button></div>
+          ${p.stock<=0 ? `<button class="notify-btn" type="button" data-notify="${i}">Avísame</button>` : `<button class="add-cart${inCart(p.sku)?' in':''}" type="button" data-add="${i}" aria-label="Agregar al carrito" title="Agregar al carrito">${ICON_CART}</button>`}</div>
         </div>
         <button class="desc-btn" type="button">${ICON_INFO}Descripción del reloj</button>
       </div>
@@ -1482,6 +1581,7 @@ function filtered(){
   const q = norm(VIEW.q).trim();
   let list = PRODUCTS.map((p,i)=>({p,i})).filter(({p})=>
     (!VIEW.offer || enOferta(p)) &&
+    (!VIEW.size || (diam(p)>=VIEW.size[0] && diam(p)<=VIEW.size[1])) &&
     (VIEW.brand==='all' || p.catLabel===VIEW.brand) &&
     (VIEW.strap==='all' || strapOf(p)===VIEW.strap) &&
     (!q || norm([p.name,p.catLabel,p.sub,p.sku,p.desc].join(' ')).includes(q)));
@@ -1496,7 +1596,8 @@ function paintGrid(){
   const page = list.slice(0, VIEW.shown);
   grid.innerHTML = page.length ? page.map(({p,i})=>cardHtml(p,i)).join('') : '<div class="cat-empty">No encontramos relojes con esa búsqueda. Prueba con otra marca o escríbenos por WhatsApp.</div>';
   const rest = list.length - page.length;
-  document.getElementById('cat-count').innerHTML = list.length ? `Mostrando <b>${page.length}</b> de <b>${list.length}</b> relojes` : '';
+  document.getElementById('cat-count').innerHTML = (list.length ? `Mostrando <b>${page.length}</b> de <b>${list.length}</b> relojes` : '') + (VIEW.size ? `<button type="button" class="size-chip" id="size-clear">Talla ${VIEW.size[0]}–${VIEW.size[1]} mm ✕</button>` : '');
+  const sc=document.getElementById('size-clear'); if(sc) sc.onclick=()=>{ VIEW.size=null; VIEW.shown=PAGE; paintGrid(); };
   const mw = document.getElementById('more-wrap');
   mw.hidden = rest<=0;
   document.getElementById('cat-more').textContent = `Ver más relojes (${rest} más)`;
@@ -1526,6 +1627,7 @@ function renderCatalog(){
   document.getElementById('catalog-grid').onclick = e=>{
     const ad = e.target.closest('[data-add]'); if(ad){ addToCart(PRODUCTS[+ad.dataset.add]); return; }
     const sh = e.target.closest('[data-share]'); if(sh){ shareProduct(PRODUCTS[+sh.dataset.share]); return; }
+    const nt = e.target.closest('[data-notify]'); if(nt){ openAviso(PRODUCTS[+nt.dataset.notify]); return; }
     if(e.target.closest('.cta')) return;
     const c = e.target.closest('.p-card'); if(c && !c.classList.contains('skeleton')) openModal(PRODUCTS[+c.dataset.i]);
   };
@@ -1764,7 +1866,38 @@ try{
 }catch(e){}
 
 const post = body => fetch(API_URL,{method:'POST',body:JSON.stringify(body),keepalive:true}).then(r=>r.json());
-function track(tipo, sku){ if(apiOn()) post({action:'evento',ref:REF||'WEB',tipo,sku:sku||''}).catch(()=>{}); } // sin vendedor queda como WEB
+// Cada evento va a la hoja "Eventos"; si pusiste Google Analytics o el píxel de Meta en la hoja "Web", también va ahí.
+const AN_MAP = {ver_reloj:['view_item','ViewContent'], carrito:['add_to_cart','AddToCart'], pedido:['begin_checkout','InitiateCheckout'], whatsapp:['contact','Contact'], aviso:['generate_lead','Lead'], compartir:['share',null]};
+function track(tipo, sku){
+  if(apiOn()) post({action:'evento',ref:REF||'WEB',tipo,sku:sku||''}).catch(()=>{}); // sin vendedor queda como WEB
+  const m = AN_MAP[tipo]; if(!m) return;
+  try{ if(window.gtag) gtag('event', m[0], {item_id: sku||'', ref: REF||'WEB'}); }catch(e){}
+  try{ if(window.fbq && m[1]) fbq('track', m[1], sku ? {content_ids:[sku], content_type:'product'} : {}); }catch(e){}
+}
+let analyticsOn = false;
+function initAnalytics(){
+  if(analyticsOn) return; analyticsOn = true;
+  if(/^G-[A-Z0-9]+$/i.test(CFG.ga)){
+    const sc=document.createElement('script'); sc.async=true; sc.src='https://www.googletagmanager.com/gtag/js?id='+CFG.ga; document.head.appendChild(sc);
+    window.dataLayer=window.dataLayer||[]; window.gtag=function(){ dataLayer.push(arguments); }; gtag('js', new Date()); gtag('config', CFG.ga);
+  }
+  if(/^\d{6,20}$/.test(CFG.pixel)){
+    !function(f,b,e,v,n,t,s){if(f.fbq)return;n=f.fbq=function(){n.callMethod?n.callMethod.apply(n,arguments):n.queue.push(arguments)};if(!f._fbq)f._fbq=n;n.push=n;n.loaded=!0;n.version='2.0';n.queue=[];t=b.createElement(e);t.async=!0;t.src=v;s=b.getElementsByTagName(e)[0];s.parentNode.insertBefore(t,s)}(window,document,'script','https://connect.facebook.net/en_US/fbevents.js');
+    fbq('init', CFG.pixel); fbq('track','PageView');
+  }
+}
+function applyConfig(){
+  // tasa del día en la sección de pagos
+  const th=document.getElementById('tasa-hoy'); if(th){ th.hidden = !(CFG.tasa>0); document.getElementById('tasa-num').textContent = 'Bs '+fmtBs(CFG.tasa||0); }
+  // contador de relojes entregados
+  const tc=document.getElementById('trust-count'); const n=+CFG.entregados||0;
+  if(tc && n>0){ tc.hidden=false; document.getElementById('cnt-txt').textContent = n===1?'reloj entregado':'relojes entregados';
+    const el=document.getElementById('cnt-num'); const go=()=>{ const t0=performance.now(); const step=now=>{ const k=Math.min(1,(now-t0)/1400); el.textContent=(n>=10?'+':'')+Math.round(n*(1-Math.pow(1-k,3))); if(k<1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
+    if('IntersectionObserver' in window){ const io=new IntersectionObserver(es=>{ if(es[0].isIntersecting){ go(); io.disconnect(); } }); io.observe(tc); } else go(); }
+  if(PRODUCTS.length && document.querySelector('.p-card:not(.skeleton)')) paintGrid();
+  paintCart();
+}
+
 const stockTxt = p => p.stock==null ? '' : (p.stock<=0 ? 'Agotado por ahora' : (p.stock===1 ? '1 unidad disponible' : p.stock+' unidades disponibles'));
 const escHtml = s => String(s==null?'':s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 function waUrl(p){ return `https://wa.me/${WA_NUM}?text=`+encodeURIComponent(`Hola, me interesa el ${p.name}${p.sku?' (SKU '+p.sku+')':''} — ${p.price}`); }
@@ -1801,6 +1934,7 @@ function parseFecha(v){
   if(m) d=new Date(+m[3], +m[2]-1, +m[1]); else { d=new Date(t); if(isNaN(d)) return 0; if(/T\d\d:/.test(t)) d=new Date(d.getTime()); d=new Date(d.getFullYear(),d.getMonth(),d.getDate()); }
   d.setHours(23,59,59,0); return d.getTime();
 }
+const diam = p => { const m=String((p.specs&&p.specs[0]&&p.specs[0][1])||'').match(/(\d+(?:[.,]\d+)?)\s*mm/i); return m ? parseFloat(m[1].replace(',','.')) : 0; };
 const enOferta = p => p.hasta > Date.now() && p.antes > priceNum(p);
 function setProducts(rows){ PRODUCTS.length = 0; rows.forEach(r=>PRODUCTS.push(mapRow(r))); }
 const CAT_KEY = 'jc_catalogo_v2';
@@ -1809,7 +1943,14 @@ let CATALOG_FROM_CACHE = false;
 try{ const c = JSON.parse(localStorage.getItem(CAT_KEY)||'null'); if(c && Array.isArray(c.rows) && c.rows.length){ setProducts(c.rows); CATALOG_FROM_CACHE = true; } }catch(e){}
 // 2) en paralelo se pide el catálogo actualizado a la hoja (empieza apenas abre la página)
 const CATALOG_REQ = apiOn() ? fetch(API_URL+'?action=catalogo').then(r=>r.json()).catch(e=>{ console.warn('Catálogo no disponible', e); return null; }) : Promise.resolve(null);
+const CFG_KEY = 'jc_cfg_v1';
+const CFG = {tasa:0, entregados:0, ga:'', pixel:''};
+try{ Object.assign(CFG, JSON.parse(localStorage.getItem(CFG_KEY)||'{}')); }catch(e){}
+const CONFIG_REQ = apiOn() ? fetch(API_URL+'?action=config').then(r=>r.json()).catch(()=>null) : Promise.resolve(null);
+const fmtBs = n => n.toLocaleString('es-VE',{minimumFractionDigits:2,maximumFractionDigits:2});
+const bsTxt = usd => CFG.tasa>0 && usd>0 ? `≈ Bs ${fmtBs(usd*CFG.tasa)}` : '';
 const RESENAS_REQ = apiOn() ? fetch(API_URL+'?action=resenas').then(r=>r.json()).catch(()=>null) : Promise.resolve(null);
+CONFIG_REQ.then(c=>{ if(c && !Array.isArray(c) && !c.error){ Object.assign(CFG,c); try{ localStorage.setItem(CFG_KEY, JSON.stringify(CFG)); }catch(e){} } applyConfig(); initAnalytics(); });
 async function loadCatalog(){
   const rows = await CATALOG_REQ;
   if(!Array.isArray(rows) || !rows.length) return false;
@@ -1832,11 +1973,12 @@ function updateSpotlight(){
 
 function openModal(p){
   const fotos = [p.img, ...(p.fotos||[])].filter(Boolean);
-  document.getElementById('modal-img').innerHTML = fotos.length ? `<div class="gal-main"><img id="gal-big" src="${thumb(fotos[0],1000)}" alt="Reloj ${escHtml(p.name)}"></div>` +
+  document.getElementById('modal-img').innerHTML = fotos.length ? `<div class="gal-main"><span class="gal-hint">Mueve o arrastra · toca para ampliar</span><img id="gal-big" src="${thumb(fotos[0],1000)}" alt="Reloj ${escHtml(p.name)}"></div>` +
     (fotos.length>1 ? `<div class="gal-thumbs">${fotos.map((f,k)=>`<button type="button" class="${k?'':'on'}" data-src="${thumb(f,1000)}"><img src="${thumb(f,200)}" alt="Foto ${k+1}" loading="lazy"></button>`).join('')}</div>` : '') : '';
   const of = enOferta(p);
   document.getElementById('modal-body').innerHTML = `<h3>${escHtml(p.name)}</h3><div class="sub">${escHtml(p.catLabel)}${p.sku?' · '+escHtml(p.sku):''}${p.label?' · '+escHtml(p.label):''}</div>
     <div class="mprice">${of?`<span class="old">$${p.antes}</span>`:''}${p.price}</div>
+    ${bsTxt(priceNum(p))?`<div class="bs">${bsTxt(priceNum(p))} · tasa del día</div>`:''}
     ${of?`<div class="offer-note">Oferta hasta el ${new Date(p.hasta).toLocaleDateString('es-VE',{day:'numeric',month:'long'})}</div>`:''}
     ${p.desc?`<div class="mtitle">Descripción del reloj</div><p class="mdesc">${escHtml(p.desc)}</p>`:''}
     <div class="mtitle">Ficha técnica</div>
@@ -1844,10 +1986,11 @@ function openModal(p){
     ${(p.specs||[]).filter(x=>x[1]).map(x=>`<div class="spec"><span>${x[0]}</span><span>${escHtml(x[1])}</span></div>`).join('')}
     <div class="m-acts">
       <a class="btn btn-fill full" href="${waUrl(p)}" target="_blank" data-sku="${p.sku||''}">Comprar por WhatsApp</a>
-      <button type="button" class="btn btn-ghost" id="m-add"${p.stock<=0?' disabled':''}>${p.stock<=0?'Agotado':(inCart(p.sku)?'En el carrito ✓':'Agregar al carrito')}</button>
+      <button type="button" class="btn btn-ghost" id="m-add">${p.stock<=0?'Avísame cuando llegue':(inCart(p.sku)?'En el carrito ✓':'Agregar al carrito')}</button>
       <button type="button" class="btn btn-ghost" id="m-share">Compartir</button>
     </div>`;
-  document.getElementById('m-add').onclick = ()=>{ addToCart(p); document.getElementById('m-add').textContent='En el carrito ✓'; };
+  document.getElementById('m-add').onclick = ()=>{ if(p.stock<=0){ openAviso(p); return; } addToCart(p); document.getElementById('m-add').textContent='En el carrito ✓'; };
+  tiltPhoto();
   document.getElementById('m-share').onclick = ()=> shareProduct(p);
   document.getElementById('modal').classList.add('open');
   track('ver_reloj', p.sku);
@@ -1887,7 +2030,7 @@ function paintCart(){
     return `<div class="ci"><img src="${thumb(p.img,200)}" alt=""><div><div class="n">${escHtml(p.name)}</div><div class="s">SKU ${escHtml(p.sku)}</div><div class="pr">${p.price}</div><button class="rm" type="button" data-rm="${escHtml(p.sku)}">Quitar</button></div>
       <div class="qty"><button type="button" data-q="-1" data-s="${escHtml(p.sku)}">−</button><span>${c.qty}</span><button type="button" data-q="1" data-s="${escHtml(p.sku)}">+</button></div></div>`; }).join('')
     : '<div class="empty">Tu carrito está vacío.<br>Toca el ícono del carrito en cualquier reloj.</div>';
-  document.getElementById('cart-total').textContent = '$'+total;
+  document.getElementById('cart-total').innerHTML = '$'+total + (bsTxt(total)?`<span class="bs">${bsTxt(total)}</span>`:'');
   document.getElementById('cart-send').disabled = !CART.length;
 }
 function sendCart(){
@@ -1895,7 +2038,7 @@ function sendCart(){
   let total = 0;
   const lines = CART.map((c,k)=>{ const p=findP(c.sku); if(!p) return ''; total += priceNum(p)*c.qty;
     return `${k+1}) ${p.name} (SKU ${p.sku}) x${c.qty} — ${p.price}${c.qty>1?' c/u':''}\n   Foto: ${thumb(p.img,800)}`; }).filter(Boolean);
-  let t = `Hola JhonClock, quiero hacer este pedido:\n\n${lines.join('\n\n')}\n\nTotal: $${total}`;
+  let t = `Hola JhonClock, quiero hacer este pedido:\n\n${lines.join('\n\n')}\n\nTotal: $${total}${CFG.tasa>0?` (${bsTxt(total)} a tasa ${fmtBs(CFG.tasa)})`:''}`;
   if(REF) t += `\n(ref: ${REF})`;
   track('pedido', CART.map(c=>c.sku+'x'+c.qty).join(' '));
   window.open(`https://wa.me/${WA_NUM}?text=`+encodeURIComponent(t), '_blank');
@@ -1913,6 +2056,57 @@ function sendCart(){
   document.getElementById('cart-send').onclick = sendCart;
   document.addEventListener('keydown', e=>{ if(e.key==='Escape') open(false); });
 })();
+
+
+/* ============ FOTO QUE SE MUEVE (gira con el mouse o el dedo, toca para ampliar) ============ */
+function tiltPhoto(){
+  const box=document.querySelector('#modal-img .gal-main'); if(!box) return; const img=box.querySelector('img'); let zoom=false;
+  const pos=(x,y)=>{ const r=box.getBoundingClientRect(); return [Math.min(1,Math.max(0,(x-r.left)/r.width)), Math.min(1,Math.max(0,(y-r.top)/r.height))]; };
+  const apply=(px,py)=>{ box.style.setProperty('--sx',px*100+'%'); box.style.setProperty('--sy',py*100+'%');
+    if(zoom){ img.style.transformOrigin=`${px*100}% ${py*100}%`; img.style.transform='scale(2.2)'; }
+    else { img.style.transformOrigin='50% 50%'; img.style.transform=`perspective(900px) rotateY(${(px-.5)*22}deg) rotateX(${(.5-py)*16}deg) scale(1.05)`; } };
+  box.onpointermove=e=>{ box.classList.add('touched'); const [x,y]=pos(e.clientX,e.clientY); apply(x,y); };
+  box.onpointerleave=()=>{ if(!zoom){ img.style.transform=''; } };
+  box.onclick=e=>{ box.classList.add('touched'); zoom=!zoom; box.classList.toggle('zoom',zoom); const [x,y]=pos(e.clientX,e.clientY); apply(x,y); if(!zoom) img.style.transform=''; };
+}
+
+/* ============ AVÍSAME CUANDO LLEGUE (reloj agotado) ============ */
+let avisoProd=null;
+function openMini(id){ document.getElementById(id).classList.add('open'); }
+function closeMini(id){ document.getElementById(id).classList.remove('open'); }
+document.querySelectorAll('.mini-modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m || e.target.closest('[data-close]')) m.classList.remove('open'); }));
+document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.mini-modal.open').forEach(m=>m.classList.remove('open')); });
+function openAviso(p){
+  avisoProd=p; document.getElementById('aviso-prod').textContent = `${p.name} · está agotado por ahora. Déjanos tu WhatsApp y te escribimos apenas vuelva.`;
+  try{ const g=JSON.parse(localStorage.getItem('jc_aviso_datos')||'{}'); if(g.n) document.getElementById('av-nombre').value=g.n; if(g.w) document.getElementById('av-wa').value=g.w; }catch(e){}
+  openMini('aviso'); setTimeout(()=>document.getElementById('av-nombre').focus(),50);
+}
+document.getElementById('aviso-form').addEventListener('submit', async e=>{
+  e.preventDefault(); if(!avisoProd) return;
+  const nombre=document.getElementById('av-nombre').value.trim(), wa=document.getElementById('av-wa').value.replace(/\D/g,'');
+  if(nombre.length<2){ toast('Escribe tu nombre'); return; }
+  if(wa.length<10){ toast('Escribe tu número de WhatsApp completo'); return; }
+  const btn=e.target.querySelector('button'); btn.disabled=true; btn.textContent='Enviando…';
+  try{
+    const d = apiOn() ? await post({action:'aviso', nombre, whatsapp:wa, sku:avisoProd.sku}) : {ok:1};
+    if(d.error){ toast(d.error); }
+    else { try{ localStorage.setItem('jc_aviso_datos', JSON.stringify({n:nombre,w:wa})); }catch(_){} track('aviso', avisoProd.sku); closeMini('aviso'); toast('¡Listo! Te avisaremos por WhatsApp cuando llegue.'); }
+  }catch(err){ toast('No se pudo enviar. Revisa tu internet.'); }
+  btn.disabled=false; btn.textContent='Avísame';
+});
+
+/* ============ GUÍA DE TALLA ============ */
+function tallaPara(cm){ return cm<15?[36,40]: cm<16.5?[38,42]: cm<18?[40,44]: cm<19.5?[42,46]:[44,48]; }
+function pintaTalla(){
+  const cm=+document.getElementById('wrist').value; const [a,b]=tallaPara(cm);
+  document.getElementById('wrist-val').textContent = String(cm).replace('.',',')+' cm';
+  const d=document.getElementById('talla-dial'); const px=Math.round(70+(a+b)/2*1.6); d.style.width=d.style.height=px+'px'; d.textContent=`${a}–${b}`;
+  const n = PRODUCTS.filter(p=>{ const x=diam(p); return x>=a && x<=b; }).length;
+  document.getElementById('talla-res').innerHTML = `Te recomendamos relojes de <b>${a} a ${b} mm</b>.<br>${n ? `Tenemos <b style="font-size:1.1rem">${n}</b> modelos en tu talla.` : 'Escríbenos y te ayudamos a elegir.'}`;
+}
+document.getElementById('size-open').onclick=()=>{ pintaTalla(); openMini('talla'); };
+document.getElementById('wrist').addEventListener('input', pintaTalla);
+document.getElementById('talla-go').onclick=()=>{ const cm=+document.getElementById('wrist').value; VIEW.size=tallaPara(cm); VIEW.shown=PAGE; closeMini('talla'); paintGrid(); track('guia_talla', String(cm)); document.getElementById('catalog-grid').scrollIntoView({behavior:'smooth',block:'start'}); };
 
 /* ============ COMPARTIR UN RELOJ (queda registrado en la hoja) ============ */
 function shareLink(p){ return `${SITE_URL}?reloj=${encodeURIComponent(p.sku)}${REF?'&ref='+REF:''}`; }
