@@ -1309,8 +1309,8 @@
       <form class="club-form" id="club-form" novalidate>
         <h3>Únete al <em>club.</em></h3>
         <div class="sub">Gratis. Solo necesitamos tu nombre y tu WhatsApp.</div>
-        <label class="fl" for="cl-nombre">Tu nombre</label><input type="text" id="cl-nombre" autocomplete="name" required>
-        <label class="fl" for="cl-wa">Tu WhatsApp</label><input type="tel" id="cl-wa" placeholder="0412 123 4567" autocomplete="tel" required>
+        <label class="fl" for="cl-nombre">Tu nombre</label><input type="text" id="cl-nombre" autocomplete="off" placeholder="Ej. Carlos Pérez" required>
+        <label class="fl" for="cl-wa">Tu WhatsApp</label><input type="tel" id="cl-wa" placeholder="0412 123 4567" autocomplete="off" required>
         <label class="fl">Me interesa</label>
         <div class="chips">
           <label><input type="checkbox" value="Relojes nuevos" checked><span>Relojes nuevos</span></label>
@@ -1425,8 +1425,8 @@
   <h3 id="aviso-t">Te avisamos cuando <em>llegue.</em></h3>
   <div class="sub" id="aviso-prod"></div>
   <form id="aviso-form" novalidate>
-    <label for="av-nombre">Tu nombre</label><input type="text" id="av-nombre" name="nombre" autocomplete="name" required>
-    <label for="av-wa">Tu WhatsApp</label><input type="tel" id="av-wa" name="whatsapp" placeholder="0412 123 4567" autocomplete="tel" required>
+    <label for="av-nombre">Tu nombre</label><input type="text" id="av-nombre" name="nombre" autocomplete="off" placeholder="Ej. Carlos Pérez" required>
+    <label for="av-wa">Tu WhatsApp</label><input type="tel" id="av-wa" name="whatsapp" placeholder="0412 123 4567" autocomplete="off" required>
     <button type="submit" class="btn btn-fill">Avísame</button>
     <div class="note">Solo te escribiremos para avisarte de este reloj.</div>
   </form>
@@ -2160,7 +2160,7 @@ document.querySelectorAll('.mini-modal').forEach(m=>m.addEventListener('click',e
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.mini-modal.open').forEach(m=>m.classList.remove('open')); });
 function openAviso(p){
   avisoProd=p; document.getElementById('aviso-prod').textContent = `${p.name} · está agotado por ahora. Déjanos tu WhatsApp y te escribimos apenas vuelva.`;
-  try{ const g=JSON.parse(localStorage.getItem('jc_aviso_datos')||'{}'); if(g.n) document.getElementById('av-nombre').value=g.n; if(g.w) document.getElementById('av-wa').value=g.w; }catch(e){}
+  document.getElementById('aviso-form').reset();
   openMini('aviso'); setTimeout(()=>document.getElementById('av-nombre').focus(),50);
 }
 document.getElementById('aviso-form').addEventListener('submit', async e=>{
@@ -2172,7 +2172,7 @@ document.getElementById('aviso-form').addEventListener('submit', async e=>{
   try{
     const d = apiOn() ? await post({action:'aviso', nombre, whatsapp:wa, sku:avisoProd.sku}) : {ok:1};
     if(d.error){ toast(d.error); }
-    else { try{ localStorage.setItem('jc_aviso_datos', JSON.stringify({n:nombre,w:wa})); }catch(_){} track('aviso', avisoProd.sku); closeMini('aviso'); toast('¡Listo! Te avisaremos por WhatsApp cuando llegue.'); }
+    else { track('aviso', avisoProd.sku); closeMini('aviso'); toast('¡Listo! Te avisaremos por WhatsApp cuando llegue.'); }
   }catch(err){ toast('No se pudo enviar. Revisa tu internet.'); }
   btn.disabled=false; btn.textContent='Avísame';
 });
@@ -2195,7 +2195,6 @@ document.getElementById('talla-go').onclick=()=>{ const cm=+document.getElementB
 (function(){
   const sec=document.getElementById('club'); if(!sec) return;
   try{ if(localStorage.getItem('jc_club')==='1') sec.classList.add('joined'); }catch(e){}
-  try{ const g=JSON.parse(localStorage.getItem('jc_aviso_datos')||'{}'); if(g.n) document.getElementById('cl-nombre').value=g.n; if(g.w) document.getElementById('cl-wa').value=g.w; }catch(e){}
   document.getElementById('club-form').addEventListener('submit', async e=>{
     e.preventDefault();
     const nombre=document.getElementById('cl-nombre').value.trim(), wa=document.getElementById('cl-wa').value.replace(/\D/g,'');
@@ -2206,7 +2205,7 @@ document.getElementById('talla-go').onclick=()=>{ const cm=+document.getElementB
     try{
       const d = apiOn() ? await post({action:'novedades', nombre, whatsapp:wa, intereses}) : {ok:1};
       if(d.error) toast(d.error);
-      else { try{ localStorage.setItem('jc_club','1'); localStorage.setItem('jc_aviso_datos', JSON.stringify({n:nombre,w:wa})); }catch(_){} sec.classList.add('joined'); track('novedades', intereses); toast(d.ya ? 'Ya estabas en el club. ¡Actualizamos tus intereses!' : '¡Bienvenido al Club JhonClock!'); }
+      else { try{ localStorage.setItem('jc_club','1'); }catch(_){} sec.classList.add('joined'); track('novedades', intereses); toast(d.ya ? 'Ya estabas en el club. ¡Actualizamos tus intereses!' : '¡Bienvenido al Club JhonClock!'); }
     }catch(err){ toast('No se pudo enviar. Revisa tu internet.'); }
     btn.disabled=false; btn.textContent='Quiero unirme';
   });
