@@ -966,6 +966,11 @@
   #preloader .in-a b .w{background:linear-gradient(100deg,#ff6a1a,#ffb347 35%,#ff3d6e 70%,#ff6a1a);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:tinte 4s ease-in-out infinite;padding-right:.06em}
   #preloader .bar-wrap{bottom:8%}
   #preloader .in-skip{position:absolute;bottom:calc(8% + 16px);left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.38);z-index:3;white-space:nowrap}
+
+  /* El degradado del texto se pinta solo dentro de la caja de la letra: a la cursiva se le sale la punta
+     (la "g", la "n", el punto). Este margen invisible le da espacio para que no se vea cortada. */
+  #hero h1 .split-word.accent span,h1 em,h2 em,#preloader .in-a b .w{padding:.06em .2em .24em .14em;margin:-.06em -.2em -.24em -.14em;-webkit-box-decoration-break:clone;box-decoration-break:clone}
+  #hero h1 .split-word.accent span{display:inline-block}
 </style>
 </head>
 <body>
@@ -1362,10 +1367,10 @@ function runPreloader(){
       .to('#preloader .in-dial',{opacity:1,scale:1,duration:.6,ease:'back.out(2)'},.3)
       .to('#in-brand span',{opacity:1,y:0,duration:.6,stagger:.07,ease:'power3.out'},.5)
       .to('#preloader .in-line',{width:()=>Math.min(320,innerWidth*.6),duration:.7,ease:'power2.inOut'},1.4)
-      .to('#in-q',{opacity:1,y:0,duration:.8,ease:'power2.out'},1.8)
-      .to('#in-a .w',{opacity:1,y:0,duration:.8,stagger:.2,ease:'power3.out'},2.7)
-      .to('#preloader .bar',{width:'100%',duration:4.4,ease:'none'},.4)
-      .to('#preloader .in-wrap',{opacity:0,y:-20,duration:.5,ease:'power2.in'},'+=.8')
+      .to('#in-q',{opacity:1,y:0,duration:.9,ease:'power2.out'},1.9)
+      .to('#in-a .w',{opacity:1,y:0,duration:.9,stagger:.25,ease:'power3.out'},3.0)
+      .to('#preloader .bar',{width:'100%',duration:6.2,ease:'none'},.4)
+      .to('#preloader .in-wrap',{opacity:0,y:-20,duration:.6,ease:'power2.in'},'+=.4')
       .to('#preloader',{clipPath:'circle(0% at 50% 50%)',duration:.6,ease:'power3.inOut'},'-=.15')
       .set('#preloader',{display:'none'});
     if(visto) tl.timeScale(2.5);
