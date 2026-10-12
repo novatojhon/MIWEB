@@ -897,8 +897,9 @@
   }
   /* compartir en la tarjeta */
   .p-card .img-wrap{position:relative}
-  .p-card .img-share{position:absolute;right:.55rem;bottom:.55rem;z-index:3;width:34px;height:34px;border-radius:50%;border:1px solid rgba(255,255,255,.25);background:rgba(10,10,11,.72);backdrop-filter:blur(4px);color:#fff;display:flex;align-items:center;justify-content:center;cursor:pointer;transition:background .25s,border-color .25s}
-  .p-card .img-share svg{width:16px;height:16px}
+  .p-card .img-share{position:absolute;left:.55rem;bottom:.55rem;z-index:3;height:32px;padding:0 .8rem 0 .65rem;border-radius:20px;border:1px solid var(--orange);background:rgba(10,10,11,.82);backdrop-filter:blur(4px);color:var(--orange-light);display:flex;align-items:center;gap:.4rem;cursor:pointer;font-family:var(--font-mono);font-weight:500;font-size:.66rem;letter-spacing:.08em;text-transform:uppercase;transition:background .25s,color .25s;box-shadow:0 6px 18px -6px rgba(0,0,0,.7)}
+  .p-card .img-share svg{width:14px;height:14px;flex:none}
+  @media(max-width:760px){.p-card .img-share{height:28px;padding:0 .6rem 0 .5rem;font-size:.56rem;gap:.3rem;left:.4rem;bottom:.4rem}.p-card .img-share svg{width:12px;height:12px}}
   .p-card .img-share:hover{background:var(--orange);border-color:var(--orange);color:#0a0a0b}
   /* capas: la ventana del reloj y el carrito quedan por encima de los botones flotantes */
   .modal{z-index:1000}
@@ -915,6 +916,43 @@
   @keyframes obPulse{50%{opacity:.25}}
   body.has-bar header#nav{top:38px}
   @media(max-width:600px){#offer-bar{gap:.55rem;font-size:.64rem;letter-spacing:.03em}#offer-bar .ob-label{display:none}#offer-bar b{font-size:.92rem}}
+
+  /* ===== Tipografía que cambia de color ===== */
+  @keyframes tinte{0%{background-position:0% 50%}50%{background-position:100% 50%}100%{background-position:0% 50%}}
+  .tinte,h1 em,h2 em,#hero h1 .split-word.accent span,header#nav .logo span,#offer-bar b,footer .f-logo span{
+    background:linear-gradient(100deg,#ff6a1a 0%,#ffb347 22%,#ff3d6e 45%,#ffd36e 68%,#ff6a1a 100%);background-size:300% 100%;
+    -webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;color:transparent;
+    animation:tinte 6s ease-in-out infinite}
+  #offer-bar b{background-image:linear-gradient(100deg,#0a0a0b 0%,#4a1300 40%,#0a0a0b 80%);animation-duration:3s}
+  /* los títulos se encienden en naranja al pasar el mouse */
+  .section-head h2,.p-card .name{transition:color .4s}
+  .p-card:hover .name{color:var(--orange-light)}
+  /* menú de arriba con fondo al bajar (ya no se monta sobre el texto) */
+  header#nav{transition:background .35s,padding .35s,backdrop-filter .35s}
+  header#nav.solid{mix-blend-mode:normal;background:rgba(10,10,11,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding-top:1rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
+  @media (prefers-reduced-motion:reduce){.tinte,h1 em,h2 em,#hero h1 .split-word.accent span,header#nav .logo span{animation:none}}
+
+  /* ===== Intro "cronógrafo" ===== */
+  #preloader{clip-path:circle(150% at 50% 50%)}
+  #preloader .pl-stage{position:relative;z-index:2;width:min(78vw,440px);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
+  #preloader .pl-dial{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
+  #preloader .pl-ring{fill:none;stroke:rgba(255,255,255,.08);stroke-width:1}
+  #preloader .pl-arc{fill:none;stroke:url(#plg);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:591;stroke-dashoffset:591;transform:rotate(-90deg);transform-origin:100px 100px;filter:drop-shadow(0 0 6px rgba(255,106,26,.55))}
+  #preloader .pl-ticks line{stroke:rgba(255,255,255,.35);stroke-width:1;opacity:0}
+  #preloader .pl-ticks line.big{stroke:#ff6a1a;stroke-width:2}
+  #preloader .pl-hand{transform-origin:100px 100px}
+  #preloader .pl-hand line{stroke:#ff6a1a;stroke-width:1.6;stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(255,106,26,.8))}
+  #preloader .pl-hand circle{fill:#0a0a0b;stroke:#ff6a1a;stroke-width:2}
+  #preloader .brand{opacity:1;display:flex;gap:.02em;font-family:var(--font-display);font-weight:900;font-size:clamp(2.6rem,10vw,4.6rem);letter-spacing:.04em;line-height:1;position:relative;z-index:3;text-shadow:0 0 30px rgba(10,10,11,.9)}
+  #preloader .brand .ch{color:var(--text);display:inline-block;min-width:.5em;text-align:center;opacity:0;transform:translateY(.4em) rotateX(80deg);transform-origin:50% 100%}
+  #preloader .brand .ch.on{opacity:1;transform:none;transition:transform .35s cubic-bezier(.2,1.6,.4,1),opacity .2s}
+  #preloader .brand .ch.cl{background:linear-gradient(100deg,#ff6a1a,#ffb347 30%,#ff3d6e 60%,#ff6a1a);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:tinte 2.4s linear infinite}
+  #preloader .brand .ch.spin{color:rgba(255,255,255,.45);-webkit-text-fill-color:rgba(255,255,255,.45)}
+  #preloader .pl-meta{position:absolute;top:calc(100% + 1.4rem);left:50%;transform:translateX(-50%);white-space:nowrap;display:flex;align-items:center;gap:.7rem;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim);opacity:0;z-index:3}
+  #preloader .pl-time{color:var(--orange-light);font-variant-numeric:tabular-nums}
+  #preloader .pl-sep{width:18px;height:1px;background:var(--orange)}
+  #preloader .bar-wrap{bottom:9%}
+  @media(max-width:480px){#preloader .pl-meta{font-size:.56rem;letter-spacing:.16em;gap:.5rem}}
 </style>
 </head>
 <body>
@@ -923,7 +961,17 @@
 
 <div id="preloader">
   <div class="mask"></div>
-  <div class="brand">JHON<span>CLOCK</span></div>
+  <div class="pl-stage">
+    <svg class="pl-dial" viewBox="0 0 200 200" aria-hidden="true">
+      <defs><linearGradient id="plg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset=".5" stop-color="#ff6a1a"/><stop offset="1" stop-color="#ff3d6e"/></linearGradient></defs>
+      <circle class="pl-ring" cx="100" cy="100" r="94"/>
+      <circle class="pl-arc" cx="100" cy="100" r="94"/>
+      <g class="pl-ticks" id="pl-ticks"></g>
+      <g class="pl-hand"><line x1="100" y1="112" x2="100" y2="14"/><circle cx="100" cy="100" r="4.5"/></g>
+    </svg>
+    <div class="brand" id="pl-brand" aria-label="JhonClock"></div>
+    <div class="pl-meta"><span class="pl-time" id="pl-time">00:00:00</span><span class="pl-sep"></span><span class="pl-tag">Precisión con actitud</span></div>
+  </div>
   <div class="bar-wrap"><div class="bar"></div></div>
 </div>
 
@@ -1278,13 +1326,47 @@ function splitHeroTitle(el){
 }
 
 /* ============ PRELOADER ============ */
+// Intro tipo cronógrafo: se dibuja la esfera, la aguja da la vuelta y JHONCLOCK cae letra por
+// letra como un marcador de estación (cada letra "gira" entre caracteres antes de fijarse).
+function buildIntro(){
+  const g = document.getElementById('pl-ticks');
+  if(g && !g.childNodes.length){
+    let h=''; for(let i=0;i<60;i++){ const big=i%5===0, a=i*6*Math.PI/180, r1=big?80:85, r2=89;
+      h+=`<line class="${big?'big':''}" x1="${100+r1*Math.sin(a)}" y1="${100-r1*Math.cos(a)}" x2="${100+r2*Math.sin(a)}" y2="${100-r2*Math.cos(a)}"/>`; }
+    g.innerHTML = h;
+  }
+  const b = document.getElementById('pl-brand');
+  if(b && !b.childNodes.length) b.innerHTML = 'JHONCLOCK'.split('').map((c,i)=>`<span class="ch${i>3?' cl':''}" data-c="${c}">${c}</span>`).join('');
+}
+function flapLetters(){
+  const pool='ABCDEFGHJKLMNOPRSTUVWXYZ0123456789';
+  document.querySelectorAll('#pl-brand .ch').forEach((el,i)=>{
+    setTimeout(()=>{
+      el.classList.add('on','spin'); let n=0; const fin=el.dataset.c;
+      const t=setInterval(()=>{ el.textContent = pool[Math.floor(Math.random()*pool.length)]; if(++n>5){ clearInterval(t); el.textContent=fin; el.classList.remove('spin'); } }, 38);
+    }, 90*i);
+  });
+}
+function runTime(ms){
+  const el=document.getElementById('pl-time'); if(!el) return; const t0=performance.now();
+  const step=now=>{ const k=Math.min(1,(now-t0)/ms), d=new Date(), tgt=[d.getHours(),d.getMinutes(),d.getSeconds()];
+    el.textContent = tgt.map(v=>String(Math.round(v*k)).padStart(2,'0')).join(':'); if(k<1) requestAnimationFrame(step); };
+  requestAnimationFrame(step);
+}
 function runPreloader(){
+  buildIntro();
   return new Promise(resolve=>{
     const tl = gsap.timeline({onComplete:resolve});
-    tl.to('#preloader .mask',{clipPath:'circle(150% at 50% 50%)',duration:.8,ease:'power3.inOut'})
-      .to('#preloader .brand',{opacity:1,duration:.6,ease:'power2.out'},'-=.7')
-      .to('#preloader .bar',{width:'100%',duration:.7,ease:'power1.inOut'},'-=.7')
-      .to('#preloader',{yPercent:-100,duration:.6,ease:'power3.inOut'},'+=.05')
+    tl.to('#preloader .mask',{clipPath:'circle(150% at 50% 50%)',duration:.7,ease:'power3.inOut'})
+      .to('#preloader .pl-ticks line',{opacity:1,duration:.02,stagger:.008},'-=.55')
+      .to('#preloader .pl-arc',{strokeDashoffset:0,duration:1.1,ease:'power2.inOut'},'<')
+      .fromTo('#preloader .pl-hand',{rotation:0},{rotation:360,duration:1.1,ease:'power2.inOut',svgOrigin:'100 100'},'<')
+      .to('#preloader .pl-hand',{opacity:0,duration:.35,ease:'power1.out'},'>-.15')
+      .add(()=>{ flapLetters(); runTime(900); },'<-.8')
+      .to('#preloader .pl-meta',{opacity:1,duration:.4},'<.5')
+      .to('#preloader .bar',{width:'100%',duration:1,ease:'power1.inOut'},'<-.4')
+      .to('#preloader .pl-stage',{scale:1.12,opacity:0,duration:.45,ease:'power2.in'},'+=.25')
+      .to('#preloader',{clipPath:'circle(0% at 50% 50%)',duration:.55,ease:'power3.inOut'},'-=.15')
       .set('#preloader',{display:'none'});
   });
 }
@@ -1371,7 +1453,7 @@ function cardHtml(p,i){
       <div class="tag">${escHtml(p.tagLabel||'')}</div>
       ${enOferta(p)?`<div class="lbl sale">Oferta</div>`:(p.label?`<div class="lbl">${escHtml(p.label)}</div>`:'')}
       <div class="img-wrap">${p.img?`<img src="${thumb(p.img,500)}" alt="Reloj ${escHtml(p.name)}" loading="lazy" decoding="async" onerror="this.remove()">`:''}
-        <button class="img-share" type="button" data-share="${i}" aria-label="Compartir este reloj" title="Compartir">${ICON_SHARE}</button></div>
+        <button class="img-share" type="button" data-share="${i}" aria-label="Compartir este reloj" title="Compartir">${ICON_SHARE}<span>Compartir</span></button></div>
       <div class="info">
         <div class="name">${escHtml(p.name)}</div>
         <div class="cat">${escHtml(p.sub||p.catLabel)}</div>
@@ -1765,6 +1847,9 @@ document.getElementById('modal-img').addEventListener('click', e=>{
   document.querySelectorAll('.gal-thumbs button').forEach(x=>x.classList.toggle('on', x===b));
 });
 
+
+/* menú con fondo cuando ya se bajó un poco */
+(function(){ const nav=document.getElementById('nav'); if(!nav) return; const f=()=>nav.classList.toggle('solid', scrollY>60); addEventListener('scroll',f,{passive:true}); f(); })();
 /* ============ CARRITO (pedido por WhatsApp con foto de cada reloj) ============ */
 const CART_KEY = 'jc_carrito_v1';
 let CART = []; try{ CART = JSON.parse(localStorage.getItem(CART_KEY)||'[]') || []; }catch(e){}
