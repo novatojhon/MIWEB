@@ -1040,6 +1040,35 @@
   @keyframes vaiven{0%,100%{transform:perspective(900px) rotateY(-7deg) rotateX(2deg) scale(1.02)}50%{transform:perspective(900px) rotateY(7deg) rotateX(-2deg) scale(1.02)}}
   .gal-hint{position:absolute;left:50%;bottom:.7rem;transform:translateX(-50%);z-index:2;background:rgba(10,10,11,.75);color:#fff;border-radius:20px;padding:.35rem .8rem;font-family:var(--font-mono);font-size:.58rem;letter-spacing:.08em;text-transform:uppercase;white-space:nowrap;pointer-events:none;transition:opacity .4s}
   .gal-main.touched .gal-hint{opacity:0}
+
+  /* ===== Club JhonClock: novedades por WhatsApp ===== */
+  #club{position:relative;overflow:hidden;background:radial-gradient(120% 90% at 85% 10%,rgba(255,106,26,.22),transparent 55%),radial-gradient(90% 80% at 0% 100%,rgba(255,61,110,.14),transparent 60%),var(--bg-alt);border-top:1px solid var(--line);border-bottom:1px solid var(--line)}
+  #club .club-grid{display:grid;grid-template-columns:1.1fr .9fr;gap:3rem;align-items:center}
+  #club .perks{list-style:none;margin:1.6rem 0 0;display:grid;gap:.9rem}
+  #club .perks li{display:flex;gap:.8rem;align-items:flex-start;color:var(--text);font-size:1rem;line-height:1.45}
+  #club .perks li svg{width:22px;height:22px;flex:none;stroke:var(--orange);margin-top:.1rem}
+  #club .perks li span{color:var(--text-dim);display:block;font-size:.88rem}
+  #club .club-card{background:rgba(10,10,11,.75);backdrop-filter:blur(8px);border:1px solid rgba(255,106,26,.35);border-radius:10px;padding:1.8rem 1.6rem;box-shadow:0 30px 60px -30px rgba(255,106,26,.45)}
+  #club .club-card h3{font-size:1.9rem;line-height:.95;margin-bottom:.3rem}
+  #club .club-card .sub{color:var(--text-dim);font-size:.88rem;margin-bottom:.4rem}
+  #club label.fl{display:block;font-family:var(--font-mono);font-size:.64rem;letter-spacing:.14em;text-transform:uppercase;color:var(--text-dim);margin:1rem 0 .35rem}
+  #club input[type=text],#club input[type=tel]{width:100%;background:transparent;border:0;border-bottom:1px solid var(--line);color:var(--text);font-family:var(--font-body);font-size:1rem;padding:.6rem 0;outline:none}
+  #club input:focus{border-color:var(--orange)}
+  #club .chips{display:flex;flex-wrap:wrap;gap:.5rem}
+  #club .chips label{cursor:pointer}
+  #club .chips input{position:absolute;opacity:0;pointer-events:none}
+  #club .chips span{display:inline-block;padding:.5rem .85rem;border-radius:20px;border:1px solid var(--line);font-family:var(--font-mono);font-size:.68rem;letter-spacing:.05em;text-transform:uppercase;color:var(--text-dim);transition:all .2s}
+  #club .chips input:checked+span{border-color:var(--orange);background:rgba(255,106,26,.16);color:var(--orange-light)}
+  #club .club-card .btn{width:100%;justify-content:center;margin-top:1.4rem}
+  #club .club-note{font-size:.72rem;color:var(--text-dim);text-align:center;margin-top:.8rem}
+  #club .canal-btn{display:flex;align-items:center;justify-content:center;gap:.5rem;margin-top:.8rem;padding:.85rem;border-radius:4px;border:1px solid #25d366;color:#25d366;font-family:var(--font-display);font-weight:700;letter-spacing:.12em;text-transform:uppercase;font-size:.85rem}
+  #club .canal-btn svg{width:18px;height:18px;fill:#25d366}
+  #club .club-ok{display:none;text-align:center;padding:1rem 0}
+  #club .club-ok b{display:block;font-family:var(--font-display);font-size:1.7rem;margin:.6rem 0 .3rem}
+  #club .club-ok svg{width:46px;height:46px;stroke:var(--orange)}
+  #club.joined .club-form{display:none}
+  #club.joined .club-ok{display:block}
+  @media(max-width:860px){#club .club-grid{grid-template-columns:1fr;gap:2rem}}
 </style>
 </head>
 <body>
@@ -1072,6 +1101,7 @@
     <a href="#catalog">Catálogo</a>
     <a href="#quiz">Quiz</a>
     <a href="#testimonials">Reseñas</a>
+    <a href="#club">Club</a>
     <a href="#vendedores">Vendedores</a>
     <a href="#contact">Contacto</a>
   </nav>
@@ -1083,6 +1113,7 @@
   <a href="#catalog">Catálogo</a>
   <a href="#quiz">Quiz</a>
   <a href="#testimonials">Reseñas</a>
+  <a href="#club">Club</a>
   <a href="#vendedores">Vendedores</a>
   <a href="#contact">Contacto</a>
 </nav>
@@ -1259,6 +1290,40 @@
     <div class="ship"><svg viewBox="0 0 24 24" fill="none" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l7 4v6c0 5-3.5 8.5-7 10-3.5-1.5-7-5-7-10V6l7-4z"/><path d="m9 12 2 2 4-4"/></svg><div><b>Garantía 30 días</b><span>Contra defectos de fábrica. Tu compra está respaldada.</span></div></div>
   </div>
   <div class="tasa-hoy" id="tasa-hoy" hidden>Tasa de hoy: <b id="tasa-num"></b> por dólar</div>
+</section>
+
+<section id="club" class="section">
+  <div class="club-grid">
+    <div>
+      <div class="section-head" style="margin-bottom:0">
+        <div class="eyebrow">Club JhonClock</div>
+        <h2>Entérate primero de lo que <em>llega.</em></h2>
+      </div>
+      <ul class="perks">
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 2l2.9 6.3 6.9.7-5.2 4.6 1.5 6.8L12 17l-6.1 3.4 1.5-6.8L2.2 9l6.9-.7z"/></svg><div>Lo nuevo antes que nadie<span>Te avisamos por WhatsApp cuando llega mercancía, antes de publicarla.</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 12v8H4v-8M2 7h20v5H2zM12 22V7M12 7H7.5a2.5 2.5 0 1 1 0-5C11 2 12 7 12 7zM12 7h4.5a2.5 2.5 0 1 0 0-5C13 2 12 7 12 7z"/></svg><div>Ofertas solo para el club<span>Precios especiales y preventas para los miembros.</span></div></li>
+        <li><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></svg><div>Sin llenarte el teléfono<span>Solo cuando hay algo que vale la pena. Te sales cuando quieras.</span></div></li>
+      </ul>
+    </div>
+    <div class="club-card">
+      <form class="club-form" id="club-form" novalidate>
+        <h3>Únete al <em>club.</em></h3>
+        <div class="sub">Gratis. Solo necesitamos tu nombre y tu WhatsApp.</div>
+        <label class="fl" for="cl-nombre">Tu nombre</label><input type="text" id="cl-nombre" autocomplete="name" required>
+        <label class="fl" for="cl-wa">Tu WhatsApp</label><input type="tel" id="cl-wa" placeholder="0412 123 4567" autocomplete="tel" required>
+        <label class="fl">Me interesa</label>
+        <div class="chips">
+          <label><input type="checkbox" value="Relojes nuevos" checked><span>Relojes nuevos</span></label>
+          <label><input type="checkbox" value="Ofertas" checked><span>Ofertas</span></label>
+          <label><input type="checkbox" value="Otros productos"><span>Otros productos</span></label>
+        </div>
+        <button type="submit" class="btn btn-fill">Quiero unirme</button>
+        <a class="canal-btn" id="canal-btn" href="#" target="_blank" rel="noopener" hidden><svg viewBox="0 0 24 24"><path d="M12 2a10 10 0 0 0-8.6 15.1L2 22l5-1.3A10 10 0 1 0 12 2zm5.3 14.2c-.2.6-1.3 1.2-1.8 1.2-.5.1-1 .1-3.2-.7-2.7-1.1-4.4-3.8-4.6-4-.1-.2-1.1-1.4-1.1-2.7s.7-1.9.9-2.2c.2-.3.5-.3.7-.3h.5c.2 0 .4 0 .6.5l.8 2c.1.2.1.4 0 .5l-.3.5-.4.4c-.1.1-.3.3-.1.6.2.3.8 1.3 1.7 2.1 1.2 1 2.1 1.4 2.4 1.5.3.1.5.1.6-.1l.8-1c.2-.2.4-.2.6-.1l1.9.9c.3.1.5.2.5.3.1.2.1.7-.1 1.3z"/></svg>Seguir el canal de WhatsApp</a>
+        <div class="club-note">Tus datos solo los usamos para avisarte. Nada de spam.</div>
+      </form>
+      <div class="club-ok"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"/><path d="m8 12 3 3 5-6"/></svg><b>¡Ya eres del club!</b><span style="color:var(--text-dim)">Te escribiremos cuando llegue algo nuevo.</span></div>
+    </div>
+  </div>
 </section>
 
 <section id="testimonials" class="section">
@@ -1883,7 +1948,7 @@ try{
 
 const post = body => fetch(API_URL,{method:'POST',body:JSON.stringify(body),keepalive:true}).then(r=>r.json());
 // Cada evento va a la hoja "Eventos"; si pusiste Google Analytics o el píxel de Meta en la hoja "Web", también va ahí.
-const AN_MAP = {ver_reloj:['view_item','ViewContent'], carrito:['add_to_cart','AddToCart'], pedido:['begin_checkout','InitiateCheckout'], whatsapp:['contact','Contact'], aviso:['generate_lead','Lead'], compartir:['share',null]};
+const AN_MAP = {novedades:['sign_up','CompleteRegistration'], ver_reloj:['view_item','ViewContent'], carrito:['add_to_cart','AddToCart'], pedido:['begin_checkout','InitiateCheckout'], whatsapp:['contact','Contact'], aviso:['generate_lead','Lead'], compartir:['share',null]};
 function track(tipo, sku){
   if(apiOn()) post({action:'evento',ref:REF||'WEB',tipo,sku:sku||''}).catch(()=>{}); // sin vendedor queda como WEB
   const m = AN_MAP[tipo]; if(!m) return;
@@ -1910,11 +1975,12 @@ function applyConfig(){
   if(tc && n>0){ tc.hidden=false; document.getElementById('cnt-txt').textContent = n===1?'reloj entregado':'relojes entregados';
     const el=document.getElementById('cnt-num'); const go=()=>{ const t0=performance.now(); const step=now=>{ const k=Math.min(1,(now-t0)/1400); el.textContent=(n>=10?'+':'')+Math.round(n*(1-Math.pow(1-k,3))); if(k<1) requestAnimationFrame(step); }; requestAnimationFrame(step); };
     if('IntersectionObserver' in window){ const io=new IntersectionObserver(es=>{ if(es[0].isIntersecting){ go(); io.disconnect(); } }); io.observe(tc); } else go(); }
+  const cb=document.getElementById('canal-btn'); if(cb && /^https:\/\/(www\.)?whatsapp\.com\/channel\//.test(CFG.canal||'')){ cb.href=CFG.canal; cb.hidden=false; }
   if(PRODUCTS.length && document.querySelector('.p-card:not(.skeleton)')) paintGrid();
   paintCart();
 }
 
-const stockTxt = p => p.stock==null ? '' : (p.stock<=0 ? 'Agotado · vuelve pronto' : (p.stock===1 ? '1 unidad disponible' : p.stock+' unidades disponibles'));
+const stockTxt = p => p.stock==null ? '' : (p.stock<=0 ? 'Agotado por ahora' : (p.stock===1 ? '1 unidad disponible' : p.stock+' unidades disponibles'));
 const escHtml = s => String(s==null?'':s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 function waUrl(p){ return `https://wa.me/${WA_NUM}?text=`+encodeURIComponent(`Hola, me interesa el ${p.name}${p.sku?' (SKU '+p.sku+')':''} — ${p.price}`); }
 
@@ -1933,7 +1999,7 @@ function mapRow(r){
   return {
     sku:r.sku, img:r.foto, name:`${r.marca} ${r.modelo}`.replace(/^(\S+)\s+\1\b/i,'$1'), catLabel:r.marca, sub:r.correa,
     cat: /cuero|piel|acero|malla|brazalete|eslabones/i.test(r.correa) ? 'clasico' : 'deportivo',
-    price:'$'+Math.round(r.precio), desc:r.descripcion, stock:r.stock, tagLabel: r.stock<=0 ? 'Vuelve pronto' : (r.stock<=2 ? 'Pocas unidades' : 'Disponible'),
+    price:'$'+Math.round(r.precio), desc:r.descripcion, stock:r.stock, tagLabel: r.stock<=0 ? 'Agotado' : (r.stock<=2 ? 'Pocas unidades' : 'Disponible'),
     label:String(r.etiqueta||'').trim(),
     fotos:String(r.fotos||r.fotos_extra||'').split(/[\s,;]+/).filter(u=>/^https?:/.test(u)).map(driveImg),
     antes:Number(String(r.precio_antes||'').replace(/[^\d.]/g,''))||0,
@@ -2123,6 +2189,28 @@ function pintaTalla(){
 document.getElementById('size-open').onclick=()=>{ pintaTalla(); openMini('talla'); };
 document.getElementById('wrist').addEventListener('input', pintaTalla);
 document.getElementById('talla-go').onclick=()=>{ const cm=+document.getElementById('wrist').value; VIEW.size=tallaPara(cm); VIEW.shown=PAGE; closeMini('talla'); paintGrid(); track('guia_talla', String(cm)); document.getElementById('catalog-grid').scrollIntoView({behavior:'smooth',block:'start'}); };
+
+
+/* ============ CLUB JHONCLOCK (novedades por WhatsApp) ============ */
+(function(){
+  const sec=document.getElementById('club'); if(!sec) return;
+  try{ if(localStorage.getItem('jc_club')==='1') sec.classList.add('joined'); }catch(e){}
+  try{ const g=JSON.parse(localStorage.getItem('jc_aviso_datos')||'{}'); if(g.n) document.getElementById('cl-nombre').value=g.n; if(g.w) document.getElementById('cl-wa').value=g.w; }catch(e){}
+  document.getElementById('club-form').addEventListener('submit', async e=>{
+    e.preventDefault();
+    const nombre=document.getElementById('cl-nombre').value.trim(), wa=document.getElementById('cl-wa').value.replace(/\D/g,'');
+    const intereses=[...sec.querySelectorAll('.chips input:checked')].map(x=>x.value).join(', ');
+    if(nombre.length<2){ toast('Escribe tu nombre'); return; }
+    if(wa.length<10){ toast('Escribe tu número de WhatsApp completo'); return; }
+    const btn=e.target.querySelector('button[type=submit]'); btn.disabled=true; btn.textContent='Enviando…';
+    try{
+      const d = apiOn() ? await post({action:'novedades', nombre, whatsapp:wa, intereses}) : {ok:1};
+      if(d.error) toast(d.error);
+      else { try{ localStorage.setItem('jc_club','1'); localStorage.setItem('jc_aviso_datos', JSON.stringify({n:nombre,w:wa})); }catch(_){} sec.classList.add('joined'); track('novedades', intereses); toast(d.ya ? 'Ya estabas en el club. ¡Actualizamos tus intereses!' : '¡Bienvenido al Club JhonClock!'); }
+    }catch(err){ toast('No se pudo enviar. Revisa tu internet.'); }
+    btn.disabled=false; btn.textContent='Quiero unirme';
+  });
+})();
 
 /* ============ COMPARTIR UN RELOJ (queda registrado en la hoja) ============ */
 function shareLink(p){ return `${SITE_URL}?reloj=${encodeURIComponent(p.sku)}${REF?'&ref='+REF:''}`; }
