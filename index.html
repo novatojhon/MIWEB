@@ -932,27 +932,6 @@
   header#nav.solid{mix-blend-mode:normal;background:rgba(10,10,11,.86);backdrop-filter:blur(10px);-webkit-backdrop-filter:blur(10px);padding-top:1rem;padding-bottom:1rem;border-bottom:1px solid var(--line)}
   @media (prefers-reduced-motion:reduce){.tinte,h1 em,h2 em,#hero h1 .split-word.accent span,header#nav .logo span{animation:none}}
 
-  /* ===== Intro "cronógrafo" ===== */
-  #preloader{clip-path:circle(150% at 50% 50%)}
-  #preloader .pl-stage{position:relative;z-index:2;width:min(78vw,440px);aspect-ratio:1;display:flex;flex-direction:column;align-items:center;justify-content:center}
-  #preloader .pl-dial{position:absolute;inset:0;width:100%;height:100%;overflow:visible}
-  #preloader .pl-ring{fill:none;stroke:rgba(255,255,255,.08);stroke-width:1}
-  #preloader .pl-arc{fill:none;stroke:url(#plg);stroke-width:2.2;stroke-linecap:round;stroke-dasharray:591;stroke-dashoffset:591;transform:rotate(-90deg);transform-origin:100px 100px;filter:drop-shadow(0 0 6px rgba(255,106,26,.55))}
-  #preloader .pl-ticks line{stroke:rgba(255,255,255,.35);stroke-width:1;opacity:0}
-  #preloader .pl-ticks line.big{stroke:#ff6a1a;stroke-width:2}
-  #preloader .pl-hand{transform-origin:100px 100px}
-  #preloader .pl-hand line{stroke:#ff6a1a;stroke-width:1.6;stroke-linecap:round;filter:drop-shadow(0 0 4px rgba(255,106,26,.8))}
-  #preloader .pl-hand circle{fill:#0a0a0b;stroke:#ff6a1a;stroke-width:2}
-  #preloader .brand{opacity:1;display:flex;gap:.02em;font-family:var(--font-display);font-weight:900;font-size:clamp(2.6rem,10vw,4.6rem);letter-spacing:.04em;line-height:1;position:relative;z-index:3;text-shadow:0 0 30px rgba(10,10,11,.9)}
-  #preloader .brand .ch{color:var(--text);display:inline-block;min-width:.5em;text-align:center;opacity:0;transform:translateY(.4em) rotateX(80deg);transform-origin:50% 100%}
-  #preloader .brand .ch.on{opacity:1;transform:none;transition:transform .35s cubic-bezier(.2,1.6,.4,1),opacity .2s}
-  #preloader .brand .ch.cl{background:linear-gradient(100deg,#ff6a1a,#ffb347 30%,#ff3d6e 60%,#ff6a1a);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:tinte 2.4s linear infinite}
-  #preloader .brand .ch.spin{color:rgba(255,255,255,.45);-webkit-text-fill-color:rgba(255,255,255,.45)}
-  #preloader .pl-meta{position:absolute;top:calc(100% + 1.4rem);left:50%;transform:translateX(-50%);white-space:nowrap;display:flex;align-items:center;gap:.7rem;font-family:var(--font-mono);font-size:.68rem;letter-spacing:.22em;text-transform:uppercase;color:var(--text-dim);opacity:0;z-index:3}
-  #preloader .pl-time{color:var(--orange-light);font-variant-numeric:tabular-nums}
-  #preloader .pl-sep{width:18px;height:1px;background:var(--orange)}
-  #preloader .bar-wrap{bottom:9%}
-  @media(max-width:480px){#preloader .pl-meta{font-size:.56rem;letter-spacing:.16em;gap:.5rem}}
 
   /* portada: la palabra en cursiva ya no se corta, y el título cabe en pantallas bajas */
   #hero h1 .split-word{padding:0 .08em .16em 0;margin:0 -.08em -.16em 0}
@@ -965,17 +944,28 @@
   @media(max-height:700px){#hero .hero-sub{margin:1rem 0 1.4rem}}
   #hero .hero-sub{text-shadow:0 1px 14px rgba(0,0,0,.85);color:#cfc9c0}
   @media(min-width:769px){#music-btn{bottom:1.8rem}}
-  /* entrada: mensaje para el amante de los relojes */
-  #preloader .pl-meta{top:auto;bottom:calc(100% + 1.2rem)}
-  #preloader .pl-msg{position:absolute;top:calc(100% + 1.3rem);left:50%;transform:translateX(-50%);width:min(92vw,560px);text-align:center;z-index:3}
-  #preloader .pl-msg .q{display:block;font-family:var(--font-mono);font-weight:500;font-size:.72rem;letter-spacing:.24em;text-transform:uppercase;color:var(--orange-light);margin-bottom:.55rem}
-  #preloader .pl-msg .a{display:block;font-family:var(--font-serif);font-style:italic;font-size:clamp(1.7rem,6.4vw,2.6rem);line-height:1.08;color:var(--text)}
-  #preloader .pl-msg .a b{font-weight:400}
-  #preloader .pl-msg .a b .w{background:linear-gradient(100deg,#ff6a1a,#ffb347 35%,#ff3d6e 70%,#ff6a1a);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:tinte 3s linear infinite}
-  #preloader .pl-msg .w{display:inline-block;opacity:0;transform:translateY(.45em);filter:blur(6px)}
-  @media(max-width:480px){#preloader .pl-msg .q{font-size:.6rem;letter-spacing:.16em}#preloader .pl-stage{width:min(70vw,440px);margin-top:-6vh}}
-  #preloader .pl-skip{position:absolute;bottom:calc(9% + 14px);left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:.58rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.32);z-index:3;white-space:nowrap}
-  #preloader{cursor:pointer}
+
+  /* ===== Entrada: clara y legible — logo, pregunta y respuesta grandes ===== */
+  #preloader{cursor:pointer;clip-path:circle(150% at 50% 50%)}
+  #preloader .in-wrap{position:relative;z-index:2;display:flex;flex-direction:column;align-items:center;text-align:center;padding:0 6vw;max-width:900px}
+  #preloader .in-dial{width:clamp(54px,9vw,78px);height:auto;margin-bottom:1.4rem;opacity:0;overflow:visible;transform:scale(.6)}
+  #preloader .in-ring{fill:none;stroke:var(--orange);stroke-width:3}
+  #preloader .in-ticks line{stroke:rgba(255,255,255,.7);stroke-width:3;stroke-linecap:round}
+  #preloader .in-min{stroke:#fff;stroke-width:4;stroke-linecap:round;transform-origin:50px 50px;animation:inGiro 12s linear infinite}
+  #preloader .in-sec{stroke:var(--orange);stroke-width:2;stroke-linecap:round;transform-origin:50px 50px;animation:inGiro 2s linear infinite}
+  #preloader .in-pin{fill:var(--orange)}
+  @keyframes inGiro{to{transform:rotate(360deg)}}
+  #preloader .in-brand{font-family:var(--font-display);font-weight:900;font-size:clamp(3.2rem,12vw,7rem);letter-spacing:.03em;line-height:.9;display:flex}
+  #preloader .in-brand span{display:inline-block;opacity:0;transform:translateY(40%);color:var(--text)}
+  #preloader .in-brand span.cl{background:linear-gradient(100deg,#ff6a1a,#ffb347 35%,#ff3d6e 70%,#ff6a1a);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:tinte 4s ease-in-out infinite}
+  #preloader .in-line{width:0;height:2px;background:linear-gradient(90deg,transparent,var(--orange),transparent);margin:1.6rem 0 1.5rem}
+  #preloader .in-q{font-family:var(--font-body);font-weight:600;font-size:clamp(1.25rem,4.6vw,2rem);line-height:1.25;color:#e9e4dc;opacity:0;transform:translateY(16px)}
+  #preloader .in-a{font-family:var(--font-serif);font-style:italic;font-size:clamp(2.2rem,8.6vw,4.2rem);line-height:1.05;color:#fff;margin-top:.5rem}
+  #preloader .in-a .w{display:inline-block;opacity:0;transform:translateY(18px)}
+  #preloader .in-a b{font-weight:400}
+  #preloader .in-a b .w{background:linear-gradient(100deg,#ff6a1a,#ffb347 35%,#ff3d6e 70%,#ff6a1a);background-size:300% 100%;-webkit-background-clip:text;background-clip:text;-webkit-text-fill-color:transparent;animation:tinte 4s ease-in-out infinite;padding-right:.06em}
+  #preloader .bar-wrap{bottom:8%}
+  #preloader .in-skip{position:absolute;bottom:calc(8% + 16px);left:50%;transform:translateX(-50%);font-family:var(--font-mono);font-size:.62rem;letter-spacing:.24em;text-transform:uppercase;color:rgba(255,255,255,.38);z-index:3;white-space:nowrap}
 </style>
 </head>
 <body>
@@ -984,20 +974,21 @@
 
 <div id="preloader">
   <div class="mask"></div>
-  <div class="pl-stage">
-    <svg class="pl-dial" viewBox="0 0 200 200" aria-hidden="true">
-      <defs><linearGradient id="plg" x1="0" y1="0" x2="1" y2="1"><stop offset="0" stop-color="#ffb347"/><stop offset=".5" stop-color="#ff6a1a"/><stop offset="1" stop-color="#ff3d6e"/></linearGradient></defs>
-      <circle class="pl-ring" cx="100" cy="100" r="94"/>
-      <circle class="pl-arc" cx="100" cy="100" r="94"/>
-      <g class="pl-ticks" id="pl-ticks"></g>
-      <g class="pl-hand"><line x1="100" y1="112" x2="100" y2="14"/><circle cx="100" cy="100" r="4.5"/></g>
+  <div class="in-wrap">
+    <svg class="in-dial" viewBox="0 0 100 100" aria-hidden="true">
+      <circle cx="50" cy="50" r="45" class="in-ring"/>
+      <g class="in-ticks"><line x1="50" y1="9" x2="50" y2="16"/><line x1="91" y1="50" x2="84" y2="50"/><line x1="50" y1="91" x2="50" y2="84"/><line x1="9" y1="50" x2="16" y2="50"/></g>
+      <line class="in-min" x1="50" y1="50" x2="50" y2="26"/>
+      <line class="in-sec" x1="50" y1="56" x2="50" y2="14"/>
+      <circle cx="50" cy="50" r="3" class="in-pin"/>
     </svg>
-    <div class="brand" id="pl-brand" aria-label="JhonClock"></div>
-    <div class="pl-meta"><span class="pl-time" id="pl-time">00:00:00</span><span class="pl-sep"></span><span class="pl-tag">Precisión con actitud</span></div>
-    <div class="pl-msg" id="pl-msg"><span class="q">¿Eres amante de los relojes?</span><span class="a">Llegaste al <b>lugar correcto.</b></span></div>
+    <div class="in-brand" id="in-brand" aria-label="JhonClock"></div>
+    <div class="in-line"></div>
+    <p class="in-q" id="in-q">¿Eres amante de los relojes?</p>
+    <p class="in-a" id="in-a">Llegaste al <b>lugar correcto.</b></p>
   </div>
   <div class="bar-wrap"><div class="bar"></div></div>
-  <div class="pl-skip">Toca para entrar</div>
+  <div class="in-skip">Toca para entrar</div>
 </div>
 
 <button type="button" id="offer-bar" aria-label="Ver relojes en oferta"><span class="ob-dot"></span><b>OFERTA</b><span class="ob-label">termina en</span><span class="ob-time" id="ob-time">--</span><span class="ob-go">Ver ofertas →</span></button>
@@ -1351,65 +1342,33 @@ function splitHeroTitle(el){
 }
 
 /* ============ PRELOADER ============ */
-// Intro tipo cronógrafo: se dibuja la esfera, la aguja da la vuelta y JHONCLOCK cae letra por
-// letra como un marcador de estación (cada letra "gira" entre caracteres antes de fijarse).
-function buildIntro(){
-  const g = document.getElementById('pl-ticks');
-  if(g && !g.childNodes.length){
-    let h=''; for(let i=0;i<60;i++){ const big=i%5===0, a=i*6*Math.PI/180, r1=big?80:85, r2=89;
-      h+=`<line class="${big?'big':''}" x1="${100+r1*Math.sin(a)}" y1="${100-r1*Math.cos(a)}" x2="${100+r2*Math.sin(a)}" y2="${100-r2*Math.cos(a)}"/>`; }
-    g.innerHTML = h;
-  }
-  const b = document.getElementById('pl-brand');
-  if(b && !b.childNodes.length) b.innerHTML = 'JHONCLOCK'.split('').map((c,i)=>`<span class="ch${i>3?' cl':''}" data-c="${c}">${c}</span>`).join('');
-}
-function splitMsg(){
-  document.querySelectorAll('#pl-msg .q, #pl-msg .a').forEach(el=>{
-    if(el.dataset.split) return; el.dataset.split=1;
-    const walk=n=>{ [...n.childNodes].forEach(c=>{
-      if(c.nodeType===3){ const f=document.createDocumentFragment();
-        c.textContent.split(/(\s+)/).forEach(t=>{ if(!t) return; if(/^\s+$/.test(t)) f.appendChild(document.createTextNode(t)); else { const sp=document.createElement('span'); sp.className='w'; sp.textContent=t; f.appendChild(sp);} });
-        c.replaceWith(f); }
-      else walk(c); }); };
-    walk(el);
-  });
-}
-function flapLetters(){
-  const pool='ABCDEFGHJKLMNOPRSTUVWXYZ0123456789';
-  document.querySelectorAll('#pl-brand .ch').forEach((el,i)=>{
-    setTimeout(()=>{
-      el.classList.add('on','spin'); let n=0; const fin=el.dataset.c;
-      const t=setInterval(()=>{ el.textContent = pool[Math.floor(Math.random()*pool.length)]; if(++n>6){ clearInterval(t); el.textContent=fin; el.classList.remove('spin'); } }, 60);
-    }, 160*i);
-  });
-}
-function runTime(ms){
-  const el=document.getElementById('pl-time'); if(!el) return; const t0=performance.now();
-  const step=now=>{ const k=Math.min(1,(now-t0)/ms), d=new Date(), tgt=[d.getHours(),d.getMinutes(),d.getSeconds()];
-    el.textContent = tgt.map(v=>String(Math.round(v*k)).padStart(2,'0')).join(':'); if(k<1) requestAnimationFrame(step); };
-  requestAnimationFrame(step);
+// Entrada: el logo se arma letra por letra, y luego la pregunta y la respuesta, grandes y despacio.
+function prepIntro(){
+  const b=document.getElementById('in-brand');
+  if(b && !b.childNodes.length) b.innerHTML='JHONCLOCK'.split('').map((c,i)=>`<span class="${i>3?'cl':''}">${c}</span>`).join('');
+  const a=document.getElementById('in-a');
+  if(a && !a.dataset.split){ a.dataset.split=1;
+    const walk=n=>[...n.childNodes].forEach(c=>{ if(c.nodeType===3){ const f=document.createDocumentFragment();
+      c.textContent.split(/(\s+)/).forEach(t=>{ if(!t) return; if(/^\s+$/.test(t)) f.appendChild(document.createTextNode(t)); else { const sp=document.createElement('span'); sp.className='w'; sp.textContent=t; f.appendChild(sp);} });
+      c.replaceWith(f);} else walk(c); });
+    walk(a); }
 }
 function runPreloader(){
-  buildIntro(); splitMsg();
-  // la primera vez se ve completa (unos 6 s); si el cliente vuelve en la misma visita, va 3 veces más rápido.
-  // Tocando la pantalla se puede saltar.
+  prepIntro();
   let visto=false; try{ visto = sessionStorage.getItem('jc_intro')==='1'; sessionStorage.setItem('jc_intro','1'); }catch(e){}
   return new Promise(resolve=>{
     const tl = gsap.timeline({onComplete:resolve});
-    tl.to('#preloader .mask',{clipPath:'circle(150% at 50% 50%)',duration:.9,ease:'power3.inOut'})
-      .to('#preloader .pl-ticks line',{opacity:1,duration:.03,stagger:.02},.25)
-      .to('#preloader .pl-arc',{strokeDashoffset:0,duration:1.8,ease:'power2.inOut'},.3)
-      .fromTo('#preloader .pl-hand',{rotation:0},{rotation:360,duration:1.8,ease:'power2.inOut',svgOrigin:'100 100'},.3)
-      .to('#preloader .pl-hand',{opacity:0,duration:.4,ease:'power1.out'},2.0)
-      .add(()=>{ flapLetters(); runTime(1600); },.6)
-      .to('#preloader .pl-meta',{opacity:1,duration:.6},1.2)
-      .to('#preloader .bar',{width:'100%',duration:4.1,ease:'power1.inOut'},.4)
-      .to('#pl-msg .q .w',{opacity:1,y:0,filter:'blur(0px)',duration:.5,stagger:.12,ease:'power2.out'},2.4)
-      .to('#pl-msg .a .w',{opacity:1,y:0,filter:'blur(0px)',duration:.7,stagger:.22,ease:'power3.out'},3.2)
-      .to('#preloader .pl-stage',{scale:1.1,opacity:0,duration:.5,ease:'power2.in'},'+=1.1')
-      .to('#preloader',{clipPath:'circle(0% at 50% 50%)',duration:.6,ease:'power3.inOut'},'-=.2')
+    tl.to('#preloader .mask',{clipPath:'circle(150% at 50% 50%)',duration:.8,ease:'power3.inOut'})
+      .to('#preloader .in-dial',{opacity:1,scale:1,duration:.6,ease:'back.out(2)'},.3)
+      .to('#in-brand span',{opacity:1,y:0,duration:.6,stagger:.07,ease:'power3.out'},.5)
+      .to('#preloader .in-line',{width:()=>Math.min(320,innerWidth*.6),duration:.7,ease:'power2.inOut'},1.4)
+      .to('#in-q',{opacity:1,y:0,duration:.8,ease:'power2.out'},1.8)
+      .to('#in-a .w',{opacity:1,y:0,duration:.8,stagger:.2,ease:'power3.out'},2.7)
+      .to('#preloader .bar',{width:'100%',duration:4.4,ease:'none'},.4)
+      .to('#preloader .in-wrap',{opacity:0,y:-20,duration:.5,ease:'power2.in'},'+=.8')
+      .to('#preloader',{clipPath:'circle(0% at 50% 50%)',duration:.6,ease:'power3.inOut'},'-=.15')
       .set('#preloader',{display:'none'});
-    if(visto) tl.timeScale(3);
+    if(visto) tl.timeScale(2.5);
     const pl=document.getElementById('preloader');
     const saltar=()=>{ if(tl.progress()<.85) tl.timeScale(4); };
     pl.addEventListener('click',saltar,{once:true});
