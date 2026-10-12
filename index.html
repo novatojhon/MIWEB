@@ -22,7 +22,8 @@
 <meta name="twitter:image" content="https://web-jhon.vercel.app/og-jhonclock.jpg">
 <link rel="icon" type="image/png" href="favicon.png">
 <link rel="apple-touch-icon" href="apple-touch-icon.png">
-<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"JhonClock","description":"Tienda de relojes de hombre en Venezuela: cronógrafos Curren, Mini Focus, Naviforce, Skmei y Megir. Garantía de 30 días y envíos a todo el país.","url":"https://web-jhon.vercel.app/","image":"https://web-jhon.vercel.app/og-jhonclock.jpg","telephone":"+58 412 573 4163","email":"cibersport33@gmail.com","address":{"@type":"PostalAddress","addressCountry":"VE"},"areaServed":"Venezuela","paymentAccepted":"Pago móvil, transferencia, efectivo","contactPoint":{"@type":"ContactPoint","telephone":"+58 412 573 4163","contactType":"sales","url":"https://wa.me/584125734163","availableLanguage":"Spanish"}}</script>
+<script type="application/ld+json">{"@context":"https://schema.org","@type":"Store","name":"JhonClock","description":"Tienda de relojes de hombre en Venezuela: cronógrafos Curren, Mini Focus, Naviforce, Skmei y Megir. Garantía de 30 días y envíos a todo el país.","url":"https://web-jhon.vercel.app/","image":"https://web-jhon.vercel.app/og-jhonclock.jpg","telephone":"+58 412 573 4163","email":"cibersport33@gmail.com","address":{"@type":"PostalAddress","addressCountry":"VE"},"areaServed":"Venezuela","paymentAccepted":"Pago móvil, Binance (USDT), efectivo","priceRange":"$26 - $128","currenciesAccepted":"USD, VES","contactPoint":{"@type":"ContactPoint","telephone":"+58 412 573 4163","contactType":"sales","url":"https://wa.me/584125734163","availableLanguage":"Spanish"}}</script>
+<script type="application/ld+json">{"@context": "https://schema.org", "@type": "FAQPage", "mainEntity": [{"@type": "Question", "name": "¿Cómo puedo pagar mi reloj en JhonClock?", "acceptedAnswer": {"@type": "Answer", "text": "Puedes pagar por Pago móvil en bolívares a la tasa del día, con Binance (USDT) o en efectivo en dólares al momento de la entrega personal."}}, {"@type": "Question", "name": "¿Hacen envíos a toda Venezuela?", "acceptedAnswer": {"@type": "Answer", "text": "Sí. Enviamos a todo el país por encomienda, con el reloj empacado y protegido, y te pasamos el número de guía. También coordinamos entregas personales según tu zona."}}, {"@type": "Question", "name": "¿Los relojes tienen garantía?", "acceptedAnswer": {"@type": "Answer", "text": "Sí, todos los relojes tienen 30 días de garantía contra defectos de fábrica."}}, {"@type": "Question", "name": "¿Qué tamaño de reloj me queda?", "acceptedAnswer": {"@type": "Answer", "text": "Depende del contorno de tu muñeca: hasta 16,5 cm se recomiendan relojes de 38 a 42 mm; de 16,5 a 18 cm, de 40 a 44 mm; y más de 18 cm, de 42 mm en adelante. En la página tienes una guía para calcularlo."}}, {"@type": "Question", "name": "¿Qué marcas de relojes venden?", "acceptedAnswer": {"@type": "Answer", "text": "Vendemos relojes para hombre de las marcas Curren, Mini Focus, Naviforce, Skmei y Megir: cronógrafos deportivos, de cuero y de acero."}}, {"@type": "Question", "name": "¿Cómo compro un reloj?", "acceptedAnswer": {"@type": "Answer", "text": "Elige tu modelo en el catálogo y toca \"Quiero comprar\": se abre WhatsApp con el reloj, el precio y la foto. Confirmamos disponibilidad, forma de pago y entrega."}}]}</script>
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link href="https://fonts.googleapis.com/css2?family=Big+Shoulders+Display:wght@600;700;800;900&family=Instrument+Serif:ital@0;1&family=IBM+Plex+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&display=swap" rel="stylesheet">
 <style>
@@ -1069,6 +1070,21 @@
   #club.joined .club-form{display:none}
   #club.joined .club-ok{display:block}
   @media(max-width:860px){#club .club-grid{grid-template-columns:1fr;gap:2rem}}
+
+  /* ===== Dos botones por reloj: Quiero comprar / Solo consultar ===== */
+  .p-card .price-row{display:flex;flex-direction:row!important;align-items:center!important;justify-content:space-between;gap:.5rem}
+  .buy-row{display:grid;grid-template-columns:1.25fr 1fr;gap:.45rem;margin-top:.8rem}
+  .buy-row a{display:flex;align-items:center;justify-content:center;text-align:center;min-height:40px;padding:.45rem .5rem;border-radius:22px;font-family:var(--font-display);font-weight:700;font-size:.74rem;letter-spacing:.05em;text-transform:uppercase;line-height:1.05;white-space:nowrap;transition:transform .2s,background .2s,color .2s,border-color .2s}
+  .buy-row .cta-buy{background:linear-gradient(120deg,var(--orange),var(--orange-deep) 130%);color:#0a0a0b;box-shadow:0 8px 20px -10px rgba(255,106,26,.8)}
+  .buy-row .cta-buy:hover{transform:translateY(-2px)}
+  .buy-row .cta-ask{border:1px solid rgba(255,255,255,.22);color:var(--text)}
+  .buy-row .cta-ask:hover{border-color:var(--orange);color:var(--orange-light)}
+  .m-acts .btn-ghost[data-tipo]{text-align:center}
+  @media(max-width:760px){
+    .buy-row{grid-template-columns:1fr;gap:.4rem;margin-top:.6rem}
+    .buy-row a{min-height:36px;font-size:.72rem;letter-spacing:.06em}
+    .p-card .price-row .add-cart{width:32px;height:32px}
+  }
 </style>
 </head>
 <body>
@@ -1123,7 +1139,7 @@
   <div class="hero-content">
     <div class="hero-eyebrow" id="hero-eyebrow">Cronógrafos · Edición urbana</div>
     <h1 id="hero-title">EL TIEMPO<br>SE VISTE DE <em>negro.</em></h1>
-    <p class="hero-sub" id="hero-sub">Relojes de precisión con actitud. Cada segundo, marcado por un diseño que no pasa desapercibido.</p>
+    <p class="hero-sub" id="hero-sub">Relojes para hombre con envío a toda Venezuela: Curren, Mini Focus, Naviforce y Skmei, con garantía de 30 días. Cada segundo, marcado por un diseño que no pasa desapercibido.</p>
     <div class="hero-actions" id="hero-actions">
       <a href="#catalog" class="btn btn-fill magnetic">Ver colección</a>
       <a href="#quiz" class="btn btn-ghost magnetic">Encuentra tu modelo</a>
@@ -1648,9 +1664,9 @@ function cardHtml(p,i){
         ${p.stock!=null?`<div class="stock${p.stock<=0?' out':''}">${stockTxt(p)}</div>`:''}
         <div class="price-row">
           <div class="price">${enOferta(p)?`<span class="old">$${p.antes}</span>`:''}${p.price}${bsTxt(priceNum(p))?`<span class="bs">${bsTxt(priceNum(p))}</span>`:''}</div>
-          ${p.stock<=0 ? '' : `<div class="acts"><a class="cta" href="${waUrl(p)}" target="_blank" rel="noopener" data-sku="${p.sku||''}">Consultar</a>
-          <button class="add-cart${inCart(p.sku)?' in':''}" type="button" data-add="${i}" aria-label="Agregar al carrito" title="Agregar al carrito">${ICON_CART}</button></div>`}
+          ${p.stock<=0 ? '' : `<button class="add-cart${inCart(p.sku)?' in':''}" type="button" data-add="${i}" aria-label="Agregar al carrito" title="Agregar al carrito">${ICON_CART}</button>`}
         </div>
+        ${p.stock<=0 ? '' : `<div class="buy-row"><a class="cta-buy" href="${waBuy(p)}" target="_blank" rel="noopener" data-sku="${p.sku||''}">Quiero comprar</a><a class="cta-ask" href="${waAsk(p)}" target="_blank" rel="noopener" data-sku="${p.sku||''}" data-tipo="consulta">Solo consultar</a></div>`}
         ${p.stock<=0 ? `<button class="notify-btn" type="button" data-notify="${i}">${ICON_BELL}<span>Quiero que me avisen</span></button><div class="notify-sub">Te escribimos apenas vuelva</div>` : ''}
         <button class="desc-btn" type="button">${ICON_INFO}Descripción del reloj</button>
       </div>
@@ -1948,7 +1964,7 @@ try{
 
 const post = body => fetch(API_URL,{method:'POST',body:JSON.stringify(body),keepalive:true}).then(r=>r.json());
 // Cada evento va a la hoja "Eventos"; si pusiste Google Analytics o el píxel de Meta en la hoja "Web", también va ahí.
-const AN_MAP = {novedades:['sign_up','CompleteRegistration'], ver_reloj:['view_item','ViewContent'], carrito:['add_to_cart','AddToCart'], pedido:['begin_checkout','InitiateCheckout'], whatsapp:['contact','Contact'], aviso:['generate_lead','Lead'], compartir:['share',null]};
+const AN_MAP = {consulta:['contact','Contact'], novedades:['sign_up','CompleteRegistration'], ver_reloj:['view_item','ViewContent'], carrito:['add_to_cart','AddToCart'], pedido:['begin_checkout','InitiateCheckout'], whatsapp:['contact','Contact'], aviso:['generate_lead','Lead'], compartir:['share',null]};
 function track(tipo, sku){
   if(apiOn()) post({action:'evento',ref:REF||'WEB',tipo,sku:sku||''}).catch(()=>{}); // sin vendedor queda como WEB
   const m = AN_MAP[tipo]; if(!m) return;
@@ -1982,7 +1998,10 @@ function applyConfig(){
 
 const stockTxt = p => p.stock==null ? '' : (p.stock<=0 ? 'Agotado por ahora' : (p.stock===1 ? '1 unidad disponible' : p.stock+' unidades disponibles'));
 const escHtml = s => String(s==null?'':s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
-function waUrl(p){ return `https://wa.me/${WA_NUM}?text=`+encodeURIComponent(`Hola, me interesa el ${p.name}${p.sku?' (SKU '+p.sku+')':''} — ${p.price}`); }
+// "Quiero comprar": mensaje listo para cerrar la venta. "Solo consultar": mensaje para preguntar sin compromiso.
+function waBuy(p){ const bs=bsTxt(priceNum(p)); return `https://wa.me/${WA_NUM}?text=`+encodeURIComponent(`Hola JhonClock, QUIERO COMPRAR este reloj:\n${p.name}${p.sku?' (SKU '+p.sku+')':''}\nPrecio: ${p.price}${bs?' ('+bs+')':''}\nFoto: ${thumb(p.img,800)}\n\n¿Cómo hago el pago y la entrega?`); }
+function waAsk(p){ return `https://wa.me/${WA_NUM}?text=`+encodeURIComponent(`Hola JhonClock, tengo una consulta sobre este reloj:\n${p.name}${p.sku?' (SKU '+p.sku+')':''} — ${p.price}\nFoto: ${thumb(p.img,800)}\n\nMi pregunta es: `); }
+const waUrl = waBuy;
 
 // Todo enlace a WhatsApp lleva el código del vendedor y registra el clic
 document.addEventListener('click', e=>{
@@ -1992,7 +2011,7 @@ document.addEventListener('click', e=>{
     if(!t.includes('ref:')) t += ` (ref: ${REF})`;
     u.searchParams.set('text', t); a.href = u.toString();
   }
-  track('whatsapp', a.dataset.sku);
+  track(a.dataset.tipo || 'whatsapp', a.dataset.sku);
 }, true);
 
 function mapRow(r){
@@ -2067,7 +2086,8 @@ function openModal(p){
     ${p.stock!=null?`<div class="spec"><span>Disponibilidad</span><span>${stockTxt(p)}</span></div>`:''}
     ${(p.specs||[]).filter(x=>x[1]).map(x=>`<div class="spec"><span>${x[0]}</span><span>${escHtml(x[1])}</span></div>`).join('')}
     <div class="m-acts">
-      <a class="btn btn-fill full" href="${waUrl(p)}" target="_blank" data-sku="${p.sku||''}">${p.stock<=0?'Preguntar por WhatsApp':'Comprar por WhatsApp'}</a>
+      ${p.stock<=0 ? `<a class="btn btn-fill full" href="${waAsk(p)}" target="_blank" data-sku="${p.sku||''}" data-tipo="consulta">Preguntar por WhatsApp</a>`
+        : `<a class="btn btn-fill" href="${waBuy(p)}" target="_blank" data-sku="${p.sku||''}">Quiero comprar</a><a class="btn btn-ghost" href="${waAsk(p)}" target="_blank" data-sku="${p.sku||''}" data-tipo="consulta">Solo consultar</a>`}
       <button type="button" class="btn ${p.stock<=0?'btn-notify':'btn-ghost'}" id="m-add">${p.stock<=0?ICON_BELL+'Quiero que me avisen':(inCart(p.sku)?'En el carrito ✓':'Agregar al carrito')}</button>
       <button type="button" class="btn btn-ghost" id="m-share">Compartir</button>
     </div>`;
@@ -2086,6 +2106,24 @@ document.getElementById('modal-img').addEventListener('click', e=>{
 
 /* menú con fondo cuando ya se bajó un poco */
 (function(){ const nav=document.getElementById('nav'); if(!nav) return; const f=()=>nav.classList.toggle('solid', scrollY>60); addEventListener('scroll',f,{passive:true}); f(); })();
+
+/* ============ SEO: lista de productos para Google (se arma con tu catálogo) ============ */
+function seoProductos(){
+  try{
+    const old=document.getElementById('ld-productos'); if(old) old.remove();
+    const items = PRODUCTS.filter(p=>p.sku && p.img).slice(0,85).map((p,k)=>({
+      "@type":"ListItem","position":k+1,
+      "item":{"@type":"Product","name":p.name,"sku":p.sku,"image":thumb(p.img,800),"description":p.desc||`Reloj ${p.name} para hombre`,
+        "brand":{"@type":"Brand","name":p.catLabel},
+        "offers":{"@type":"Offer","price":String(priceNum(p)),"priceCurrency":"USD","url":`${SITE_URL}?reloj=${encodeURIComponent(p.sku)}`,
+          "availability": p.stock>0 ? "https://schema.org/InStock" : "https://schema.org/OutOfStock","itemCondition":"https://schema.org/NewCondition",
+          "seller":{"@type":"Organization","name":"JhonClock"}}}}));
+    if(!items.length) return;
+    const sc=document.createElement('script'); sc.type='application/ld+json'; sc.id='ld-productos';
+    sc.textContent=JSON.stringify({"@context":"https://schema.org","@type":"ItemList","name":"Catálogo de relojes JhonClock","itemListElement":items});
+    document.head.appendChild(sc);
+  }catch(e){}
+}
 /* ============ CARRITO (pedido por WhatsApp con foto de cada reloj) ============ */
 const CART_KEY = 'jc_carrito_v1';
 let CART = []; try{ CART = JSON.parse(localStorage.getItem(CART_KEY)||'[]') || []; }catch(e){}
@@ -2375,7 +2413,7 @@ const Music = (()=>{
 // El catálogo se dibuja apenas la página está lista (desde la memoria del teléfono o con tarjetas de carga),
 // sin esperar la animación de entrada ni las reseñas.
 document.addEventListener('DOMContentLoaded', ()=>{
-  const after = ()=>{ paintCart(); promoOffer(); openDeepLink(); };
+  const after = ()=>{ paintCart(); promoOffer(); openDeepLink(); seoProductos(); };
   if(CATALOG_FROM_CACHE){ renderCatalog(); updateSpotlight(); after(); }
   else document.getElementById('catalog-grid').innerHTML = skeleton(6);
   loadCatalog().then(ok=>{ if(ok || !CATALOG_FROM_CACHE){ renderCatalog(); updateSpotlight(); after(); } });
