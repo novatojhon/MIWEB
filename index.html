@@ -2271,7 +2271,7 @@ document.getElementById('talla-go').onclick=()=>{ const cm=+document.getElementB
 /* ============ CLUB JHONCLOCK (novedades por WhatsApp) ============ */
 (function(){
   const sec=document.getElementById('club'); if(!sec) return;
-  try{ if(localStorage.getItem('jc_club')==='1') sec.classList.add('joined'); }catch(e){}
+  try{ localStorage.removeItem('jc_club'); }catch(e){} // el formulario siempre aparece al entrar; el mensaje de éxito solo se ve justo después de registrarse
   document.getElementById('club-otro').onclick=()=>{ try{ localStorage.removeItem('jc_club'); }catch(e){} document.getElementById('club-form').reset(); sec.classList.remove('joined'); document.getElementById('cl-nombre').focus(); };
   document.getElementById('club-form').addEventListener('submit', async e=>{
     e.preventDefault();
@@ -2283,7 +2283,7 @@ document.getElementById('talla-go').onclick=()=>{ const cm=+document.getElementB
     try{
       const d = apiOn() ? await post({action:'novedades', nombre, whatsapp:wa, intereses}) : {ok:1};
       if(d.error) toast(d.error);
-      else { try{ localStorage.setItem('jc_club','1'); }catch(_){} sec.classList.add('joined'); track('novedades', intereses); toast(d.ya ? 'Ya estabas en el club. ¡Actualizamos tus intereses!' : '¡Bienvenido al Club JhonClock!'); }
+      else { sec.classList.add('joined'); document.getElementById('club-form').reset(); track('novedades', intereses); toast(d.ya ? 'Ya estabas en el club. ¡Actualizamos tus intereses!' : '¡Bienvenido al Club JhonClock!'); }
     }catch(err){ toast('No se pudo enviar. Revisa tu internet.'); }
     btn.disabled=false; btn.textContent='Quiero unirme';
   });
