@@ -762,6 +762,11 @@
   .vend-forms form{display:grid;gap:1.4rem}
   #vend-result{background:var(--bg-card);border:1px solid var(--line);padding:1.8rem;border-radius:4px}
   #vend-result h3{font-size:1.2rem}
+  .qr-box{display:grid;grid-template-columns:auto 1fr;gap:1.4rem;align-items:center;margin:1.4rem 0;padding:1.2rem;border:1px solid var(--line);border-radius:4px;background:var(--bg)}
+  .qr-box canvas{width:170px;height:auto;border-radius:6px;display:block;background:#fff}
+  .qr-box .qr-acts{display:grid;gap:.7rem}
+  .qr-box .qr-acts .btn{justify-content:center}
+  @media(max-width:520px){.qr-box{grid-template-columns:1fr;justify-items:center;text-align:center}.qr-box canvas{width:220px}.qr-box .qr-acts{width:100%}}
   .ref-link{word-break:break-all;background:var(--bg);border:1px solid var(--orange);padding:1rem;margin:1rem 0;font-size:.9rem}
   .stats{display:grid;grid-template-columns:repeat(2,1fr);gap:1px;background:var(--line);margin:1.4rem 0}
   .stats div{background:var(--bg-card);padding:1rem;font-size:.76rem;color:var(--text-dim)}
@@ -2355,6 +2360,53 @@ function promoOffer(){
   document.addEventListener('keydown', e=>{ if(e.key==='Escape') m.classList.remove('open'); });
 })();
 
+/* ============ QR DEL VENDEDOR (se genera en el navegador) ============ */
+let QR_LIB = null;
+function loadQRLib(){
+  if(window.qrcode) return Promise.resolve();
+  if(QR_LIB) return QR_LIB;
+  const urls = ['https://cdnjs.cloudflare.com/ajax/libs/qrcode-generator/1.4.4/qrcode.min.js','https://cdn.jsdelivr.net/npm/qrcode-generator@1.4.4/qrcode.js'];
+  QR_LIB = urls.reduce((pr,u)=>pr.catch(()=>new Promise((ok,ko)=>{ const sc=document.createElement('script'); sc.src=u; sc.onload=()=>window.qrcode?ok():ko(); sc.onerror=ko; document.head.appendChild(sc); })), Promise.reject());
+  QR_LIB.catch(()=>{ QR_LIB=null; });
+  return QR_LIB;
+}
+async function drawQR(link, codigo){
+  const cv = document.getElementById('qr-canvas'); if(!cv) return;
+  const bDown = document.getElementById('qr-down'), bShare = document.getElementById('qr-share');
+  try{ await loadQRLib(); }catch(e){ cv.replaceWith(Object.assign(document.createElement('p'),{className:'note',textContent:'No se pudo crear el QR. Revisa tu internet y vuelve a entrar a tu panel.'})); bDown.hidden=bShare.hidden=true; return; }
+  const qr = qrcode(0,'H'); qr.addData(link); qr.make();
+  const n = qr.getModuleCount(), W = cv.width, H = cv.height, pad = 72, top = 90;
+  const cell = Math.floor((W-pad*2)/n), size = cell*n, x0 = Math.round((W-size)/2), y0 = top+44;
+  const x = cv.getContext('2d');
+  x.fillStyle='#ffffff'; x.fillRect(0,0,W,H);
+  // franja superior con la marca
+  x.fillStyle='#0a0a0b'; x.fillRect(0,0,W,top);
+  x.textAlign='center'; x.textBaseline='middle'; x.font='700 46px Oswald, Arial, sans-serif';
+  const a='JHON', b='CLOCK', wa=x.measureText(a).width, wb=x.measureText(b).width, sx=(W-wa-wb)/2;
+  x.textAlign='left'; x.fillStyle='#ffffff'; x.fillText(a,sx,top/2); x.fillStyle='#ff6a1a'; x.fillText(b,sx+wa,top/2);
+  // módulos del QR
+  x.fillStyle='#0a0a0b';
+  for(let r=0;r<n;r++) for(let c=0;c<n;c++) if(qr.isDark(r,c)) x.fillRect(x0+c*cell,y0+r*cell,cell,cell);
+  // sello central (el nivel H del QR tolera que se tape el centro)
+  const cx=W/2, cy=y0+size/2, rad=size*0.11;
+  x.fillStyle='#ffffff'; x.beginPath(); x.arc(cx,cy,rad+10,0,7); x.fill();
+  x.fillStyle='#ff6a1a'; x.beginPath(); x.arc(cx,cy,rad,0,7); x.fill();
+  x.fillStyle='#0a0a0b'; x.textAlign='center'; x.font=`700 ${Math.round(rad*0.95)}px Oswald, Arial, sans-serif`; x.fillText('JC',cx,cy+2);
+  // pie con el usuario
+  const fy = y0+size+(H-(y0+size))/2;
+  x.fillStyle='#0a0a0b'; x.font='600 34px Oswald, Arial, sans-serif'; x.fillText('Escanea y elige tu reloj',W/2,fy-24);
+  x.fillStyle='#ff6a1a'; x.font='700 30px Oswald, Arial, sans-serif'; x.fillText('Vendedor: '+codigo,W/2,fy+22);
+  const file = 'jhonclock-qr-'+codigo+'.png';
+  bDown.disabled = false;
+  bDown.onclick = ()=>{ cv.toBlob(bl=>{ const u=URL.createObjectURL(bl); const el=Object.assign(document.createElement('a'),{href:u,download:file}); document.body.appendChild(el); el.click(); el.remove(); setTimeout(()=>URL.revokeObjectURL(u),4000); },'image/png'); };
+  bShare.disabled = false;
+  bShare.onclick = ()=>{ cv.toBlob(async bl=>{
+    const f = new File([bl], file, {type:'image/png'}), txt = 'Mira los relojes de JhonClock: '+link;
+    try{ if(navigator.canShare && navigator.canShare({files:[f]})){ await navigator.share({files:[f], text:txt}); return; } }catch(e){ if(e && e.name==='AbortError') return; }
+    window.open('https://wa.me/?text='+encodeURIComponent(txt),'_blank');
+  },'image/png'); };
+}
+
 function vendedores(){
   const out = document.getElementById('vend-result');
   const badgeEstado = estado=>{
@@ -2386,12 +2438,17 @@ function vendedores(){
     out.hidden = false;
     out.innerHTML = `<h3>Hola, ${d.nombre}</h3><p class="note">Tu enlace de referido:</p><div class="ref-link">${link}</div>
       <button class="btn btn-ghost" id="copy-ref">Copiar enlace</button>
+      <div class="qr-box"><canvas id="qr-canvas" width="720" height="880" aria-label="Código QR de tu enlace de vendedor"></canvas>
+        <div class="qr-acts"><p class="note" style="margin:0">Tu código QR: quien lo escanee entra a la tienda con tu usuario.</p>
+          <button type="button" class="btn btn-fill" id="qr-down" disabled>Descargar QR</button>
+          <button type="button" class="btn btn-ghost" id="qr-share" disabled>Compartir QR</button></div></div>
       <div class="stats"><div><b>${d.visitas}</b>Visitas</div><div><b>${d.clics}</b>Clics a WhatsApp</div><div><b>${d.ventas}</b>Ventas confirmadas</div><div><b>$${Number(d.comision).toFixed(2)}</b>Comisión acumulada</div><div><b>$${Number(d.pagado).toFixed(2)}</b>Ya pagado</div><div><b>$${Number(d.porPagar).toFixed(2)}</b>Por pagar</div></div>
       <p class="note">${d.consultas>0 ? `Tienes <b>${d.consultas}</b> ${d.consultas===1?'consulta':'consultas'} por WhatsApp todavía sin confirmar como venta.` : 'No tienes consultas pendientes por confirmar.'}</p>
       <div class="bitacora-head"><h4>Bitácora — todo lo que ha pasado</h4></div>
       ${bitacoraHtml(d.bitacora)}
       <p class="note" style="margin-top:1rem">Tu usuario es <b>${d.codigo}</b>. Guárdalo junto a tu PIN para volver a entrar.</p>`;
     document.getElementById('copy-ref').onclick = ev=>{ navigator.clipboard.writeText(link); ev.target.textContent='Enlace copiado'; };
+    drawQR(link, d.codigo);
     out.scrollIntoView({behavior:'smooth',block:'center'});
   };
   const wire = (id, action)=>document.getElementById(id).addEventListener('submit', async e=>{
