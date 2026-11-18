@@ -356,6 +356,8 @@
   .p-card:hover .img-wrap img{transform:scale(1.08);}
   .p-card .info{padding:1.1rem 1.2rem 1.3rem;}
   .p-card .name{font-family:var(--font-display);font-size:.98rem;text-transform:uppercase;letter-spacing:.02em;}
+  .p-no{display:inline-block;background:var(--orange);color:#0a0a0b;font-family:var(--font-display);font-weight:700;letter-spacing:.02em;padding:.05em .4em;border-radius:3px;margin-right:.35em;line-height:1.3}
+  .modal-body h3 .p-no{font-size:.85em;vertical-align:.08em}
   .p-card .cat{font-size:.72rem;color:var(--text-dim);margin:.2rem 0 .7rem;text-transform:uppercase;letter-spacing:.08em;}
   .p-card .price-row{display:flex;align-items:center;justify-content:space-between;}
   .p-card .price{font-family:var(--font-display);color:var(--orange-light);font-size:1.1rem;}
@@ -1210,9 +1212,9 @@
     <h2>Cada modelo, una <em>actitud</em> distinta.</h2>
   </div>
   <div class="cat-tools">
-    <label class="cat-search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="cat-search" type="search" placeholder="Buscar marca o modelo…" autocomplete="off" aria-label="Buscar reloj"></label>
+    <label class="cat-search"><svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="11" cy="11" r="7"/><path d="m20 20-3.5-3.5"/></svg><input id="cat-search" type="search" placeholder="Buscar por número, marca o modelo…" autocomplete="off" aria-label="Buscar reloj"></label>
     <select id="cat-strap" class="cat-select" aria-label="Tipo de correa"><option value="all">Toda correa</option></select>
-    <select id="cat-sort" class="cat-select" aria-label="Ordenar"><option value="rec">Recomendados</option><option value="asc">Menor precio</option><option value="desc">Mayor precio</option></select>
+    <select id="cat-sort" class="cat-select" aria-label="Ordenar"><option value="rec">Recomendados</option><option value="asc">Menor precio</option><option value="desc">Mayor precio</option><option value="num">Por número</option></select>
     <button type="button" class="size-btn" id="size-open"><svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="6"/><path d="M12 3v3M12 18v3M9 9l3 3"/></svg>¿Qué tamaño me queda?</button>
   </div>
   <div class="filters" id="filters"><button class="filter-btn active" data-filter="all">Todos</button></div>
@@ -1715,6 +1717,9 @@ const VIEW = {brand:'all', strap:'all', q:'', sort:'rec', shown:PAGE, offer:fals
 const ICON_INFO = '<svg viewBox="0 0 24 24" fill="none" stroke-width="2" stroke-linecap="round"><circle cx="12" cy="12" r="9"/><path d="M12 11v5M12 8h.01"/></svg>';
 const thumb = (url,w)=> url ? String(url).replace(/sz=w\d+/,'sz=w'+w) : url;
 const norm = t => String(t||'').toLowerCase().normalize('NFD').replace(/[̀-ͯ]/g,'');
+// Número fijo del reloj (columna "No." de la hoja): sale primero en tarjetas, ficha, carrito y WhatsApp
+const noTxt = p => p && p.no ? '#'+p.no+' ' : '';
+const noHtml = p => p && p.no ? `<span class="p-no">#${p.no}</span>` : '';
 function strapOf(p){ const c=norm(p.sub); if(/silicon|caucho|goma|resina/.test(c)) return 'Silicona'; if(/cuero|piel/.test(c)) return 'Cuero'; if(/acero|metal|malla|eslab|brazal/.test(c)) return 'Acero'; return p.sub ? p.sub : 'Otra'; }
 function priceNum(p){ return parseInt(String(p.price).replace(/\D/g,''),10)||0; }
 function skeleton(n){ return Array.from({length:n},()=>'<div class="p-card skeleton"><div class="img-wrap"></div><div class="info"><div style="width:80%"></div><div style="width:50%"></div><div style="width:35%"></div></div></div>').join(''); }
@@ -1725,7 +1730,7 @@ function cardHtml(p,i){
       <div class="img-wrap">${p.img?`<img src="${thumb(p.img,500)}" alt="Reloj ${escHtml(p.name)}" loading="lazy" decoding="async" onerror="this.remove()">`:''}
         <button class="img-share" type="button" data-share="${i}" aria-label="Compartir este reloj" title="Compartir">${ICON_SHARE}<span>Compartir</span></button></div>
       <div class="info">
-        <div class="name">${escHtml(p.name)}</div>
+        <div class="name">${noHtml(p)}${escHtml(p.name)}</div>
         <div class="cat">${escHtml(p.sub||p.catLabel)}</div>
         ${p.stock!=null?`<div class="stock${p.stock<=0?' out':''}">${stockTxt(p)}</div>`:''}
         <div class="price-row">
@@ -1740,12 +1745,14 @@ function cardHtml(p,i){
 }
 function filtered(){
   const q = norm(VIEW.q).trim();
+  const qNum = (q.match(/^(?:#|n(?:o|ro|umero)?\.?\s*)?(\d{1,4})$/)||[])[1]; // "12", "#12", "no 12" → reloj número 12
   let list = PRODUCTS.map((p,i)=>({p,i})).filter(({p})=>
     (!VIEW.offer || enOferta(p)) &&
     (!VIEW.size || (diam(p)>=VIEW.size[0] && diam(p)<=VIEW.size[1])) &&
     (VIEW.brand==='all' || p.catLabel===VIEW.brand) &&
     (VIEW.strap==='all' || strapOf(p)===VIEW.strap) &&
-    (!q || norm([p.name,p.catLabel,p.sub,p.sku,p.desc].join(' ')).includes(q)));
+    (!q || (qNum ? String(p.no)===String(+qNum) : norm([noTxt(p),p.name,p.catLabel,p.sub,p.sku,p.desc].join(' ')).includes(q))));
+  if(VIEW.sort==='num') list.sort((a,b)=>((+a.p.no||1e9)-(+b.p.no||1e9)) || (a.i-b.i));
   if(VIEW.sort==='asc') list.sort((a,b)=>priceNum(a.p)-priceNum(b.p));
   if(VIEW.sort==='desc') list.sort((a,b)=>priceNum(b.p)-priceNum(a.p));
   // Recomendados: primero las ofertas y los que tienen etiqueta; el resto en el mismo orden de tu hoja.
@@ -1957,7 +1964,7 @@ function quiz(){
       <div class="quiz-pick${k===0?' top':''}">
         ${p.img?`<img src="${thumb(p.img,500)}" alt="${escHtml(p.name)}">`:''}
         <div class="qi"><div class="ql">${k===0?'Tu match ideal':'También te puede gustar'}</div>
-          <h4>${escHtml(p.name)}</h4><div class="qp">${p.price}</div>
+          <h4>${noHtml(p)}${escHtml(p.name)}</h4><div class="qp">${p.price}</div>
           <div class="qa"><button type="button" data-open="${PRODUCTS.indexOf(p)}">Descripción</button><a href="${waUrl(p)}" target="_blank" rel="noopener" data-sku="${p.sku||''}">Lo quiero</a></div>
         </div>
       </div>`).join('')}</div>`;
@@ -2066,8 +2073,8 @@ function applyConfig(){
 const stockTxt = p => p.stock==null ? '' : (p.stock<=0 ? 'Agotado por ahora' : (p.stock===1 ? '1 unidad disponible' : p.stock+' unidades disponibles'));
 const escHtml = s => String(s==null?'':s).replace(/[&<>]/g, c=>({'&':'&amp;','<':'&lt;','>':'&gt;'}[c]));
 // "Quiero comprar": mensaje listo para cerrar la venta. "Solo consultar": mensaje para preguntar sin compromiso.
-function waBuy(p){ const bs=bsTxt(priceNum(p)); return `https://wa.me/${WA_NUM}?text=`+encodeURIComponent(`Hola JhonClock, QUIERO COMPRAR este reloj:\n${p.name}${p.sku?' (SKU '+p.sku+')':''}\nPrecio: ${p.price}${bs?' ('+bs+')':''}\nFoto: ${thumb(p.img,800)}\n\n¿Cómo hago el pago y la entrega?`); }
-function waAsk(p){ return `https://wa.me/${WA_NUM}?text=`+encodeURIComponent(`Hola JhonClock, tengo una consulta sobre este reloj:\n${p.name}${p.sku?' (SKU '+p.sku+')':''} — ${p.price}\nFoto: ${thumb(p.img,800)}\n\nMi pregunta es: `); }
+function waBuy(p){ const bs=bsTxt(priceNum(p)); return `https://wa.me/${WA_NUM}?text=`+encodeURIComponent(`Hola JhonClock, QUIERO COMPRAR este reloj:\n${noTxt(p)}${p.name}${p.sku?' (SKU '+p.sku+')':''}\nPrecio: ${p.price}${bs?' ('+bs+')':''}\nFoto: ${thumb(p.img,800)}\n\n¿Cómo hago el pago y la entrega?`); }
+function waAsk(p){ return `https://wa.me/${WA_NUM}?text=`+encodeURIComponent(`Hola JhonClock, tengo una consulta sobre este reloj:\n${noTxt(p)}${p.name}${p.sku?' (SKU '+p.sku+')':''} — ${p.price}\nFoto: ${thumb(p.img,800)}\n\nMi pregunta es: `); }
 const waUrl = waBuy;
 
 // Todo enlace a WhatsApp lleva el código del vendedor y registra el clic
@@ -2083,7 +2090,7 @@ document.addEventListener('click', e=>{
 
 function mapRow(r){
   return {
-    sku:r.sku, img:r.foto, name:`${r.marca} ${r.modelo}`.replace(/^(\S+)\s+\1\b/i,'$1'), catLabel:r.marca, sub:r.correa,
+    no:r.no||'', sku:r.sku, img:r.foto, name:`${r.marca} ${r.modelo}`.replace(/^(\S+)\s+\1\b/i,'$1'), catLabel:r.marca, sub:r.correa,
     cat: /cuero|piel|acero|malla|brazalete|eslabones/i.test(r.correa) ? 'clasico' : 'deportivo',
     price:'$'+Math.round(r.precio), desc:r.descripcion, stock:r.stock, tagLabel: r.stock<=0 ? 'Agotado' : (r.stock<=2 ? 'Pocas unidades' : 'Disponible'),
     label:String(r.etiqueta||'').trim(),
@@ -2104,7 +2111,7 @@ function parseFecha(v){
 }
 const diam = p => { const m=String((p.specs&&p.specs[0]&&p.specs[0][1])||'').match(/(\d+(?:[.,]\d+)?)\s*mm/i); return m ? parseFloat(m[1].replace(',','.')) : 0; };
 const enOferta = p => p.hasta > Date.now() && p.antes > priceNum(p);
-function setProducts(rows){ PRODUCTS.length = 0; rows.forEach(r=>PRODUCTS.push(mapRow(r))); }
+function setProducts(rows){ PRODUCTS.length = 0; const conNo = rows.some(r=>r.no); rows.forEach((r,k)=>PRODUCTS.push(mapRow(conNo ? r : {...r, no:k+1}))); }
 const CAT_KEY = 'jc_catalogo_v2';
 let CATALOG_FROM_CACHE = false;
 // 1) si el visitante ya entró antes, se muestra al instante el catálogo guardado en su teléfono
@@ -2131,7 +2138,7 @@ async function loadCatalog(){
 function updateSpotlight(){
   const p = PRODUCTS.find(x => /megir/i.test(x.name)) || PRODUCTS[0];
   if(!p) return;
-  document.getElementById('spotlight-name').textContent = p.name;
+  document.getElementById('spotlight-name').textContent = noTxt(p) + p.name;
   if(p.desc) document.getElementById('spotlight-desc').textContent = p.desc;
   document.getElementById('spotlight-price').textContent = p.price;
   const cta = document.getElementById('spotlight-cta');
@@ -2144,7 +2151,7 @@ function openModal(p){
   document.getElementById('modal-img').innerHTML = fotos.length ? `<div class="gal-main"><span class="gal-hint">Mueve o arrastra · toca para ampliar</span><img id="gal-big" src="${thumb(fotos[0],1000)}" alt="Reloj ${escHtml(p.name)}"></div>` +
     (fotos.length>1 ? `<div class="gal-thumbs">${fotos.map((f,k)=>`<button type="button" class="${k?'':'on'}" data-src="${thumb(f,1000)}"><img src="${thumb(f,200)}" alt="Foto ${k+1}" loading="lazy"></button>`).join('')}</div>` : '') : '';
   const of = enOferta(p);
-  document.getElementById('modal-body').innerHTML = `<h3>${escHtml(p.name)}</h3><div class="sub">${escHtml(p.catLabel)}${p.sku?' · '+escHtml(p.sku):''}${p.label?' · '+escHtml(p.label):''}</div>
+  document.getElementById('modal-body').innerHTML = `<h3>${noHtml(p)}${escHtml(p.name)}</h3><div class="sub">${escHtml(p.catLabel)}${p.sku?' · '+escHtml(p.sku):''}${p.label?' · '+escHtml(p.label):''}</div>
     <div class="mprice">${of?`<span class="old">$${p.antes}</span>`:''}${p.price}</div>
     ${bsTxt(priceNum(p))?`<div class="bs">${bsTxt(priceNum(p))} · tasa del día</div>`:''}
     ${of?`<div class="offer-note">Oferta hasta el ${new Date(p.hasta).toLocaleDateString('es-VE',{day:'numeric',month:'long'})}</div>`:''}
@@ -2202,7 +2209,7 @@ function addToCart(p){
   if(!p || !p.sku || p.stock<=0) return;
   const c = CART.find(x=>x.sku===p.sku);
   if(c){ if(p.stock==null || c.qty < p.stock) c.qty++; } else CART.push({sku:p.sku, qty:1});
-  saveCart(); track('carrito', p.sku); toast('Agregado al carrito: '+p.name);
+  saveCart(); track('carrito', p.sku); toast('Agregado al carrito: '+noTxt(p)+p.name);
   const f=document.getElementById('cart-fab'); f.classList.remove('bump'); void f.offsetWidth; f.classList.add('bump');
   document.querySelectorAll(`[data-add]`).forEach(b=>{ const q=PRODUCTS[+b.dataset.add]; if(q && q.sku===p.sku) b.classList.add('in'); });
 }
@@ -2214,7 +2221,7 @@ function paintCart(){
   const box = document.getElementById('cart-items');
   let total = 0;
   box.innerHTML = CART.length ? CART.map(c=>{ const p=findP(c.sku); if(!p) return ''; total += priceNum(p)*c.qty;
-    return `<div class="ci"><img src="${thumb(p.img,200)}" alt=""><div><div class="n">${escHtml(p.name)}</div><div class="s">SKU ${escHtml(p.sku)}</div><div class="pr">${p.price}</div><button class="rm" type="button" data-rm="${escHtml(p.sku)}">Quitar</button></div>
+    return `<div class="ci"><img src="${thumb(p.img,200)}" alt=""><div><div class="n">${noHtml(p)}${escHtml(p.name)}</div><div class="s">SKU ${escHtml(p.sku)}</div><div class="pr">${p.price}</div><button class="rm" type="button" data-rm="${escHtml(p.sku)}">Quitar</button></div>
       <div class="qty"><button type="button" data-q="-1" data-s="${escHtml(p.sku)}">−</button><span>${c.qty}</span><button type="button" data-q="1" data-s="${escHtml(p.sku)}">+</button></div></div>`; }).join('')
     : '<div class="empty">Tu carrito está vacío.<br>Toca el ícono del carrito en cualquier reloj.</div>';
   document.getElementById('cart-total').innerHTML = '$'+total + (bsTxt(total)?`<span class="bs">${bsTxt(total)}</span>`:'');
@@ -2224,7 +2231,7 @@ function sendCart(){
   if(!CART.length) return;
   let total = 0;
   const lines = CART.map((c,k)=>{ const p=findP(c.sku); if(!p) return ''; total += priceNum(p)*c.qty;
-    return `${k+1}) ${p.name} (SKU ${p.sku}) x${c.qty} — ${p.price}${c.qty>1?' c/u':''}\n   Foto: ${thumb(p.img,800)}`; }).filter(Boolean);
+    return `${k+1}) ${noTxt(p)}${p.name} (SKU ${p.sku}) x${c.qty} — ${p.price}${c.qty>1?' c/u':''}\n   Foto: ${thumb(p.img,800)}`; }).filter(Boolean);
   let t = `Hola JhonClock, quiero hacer este pedido:\n\n${lines.join('\n\n')}\n\nTotal: $${total}${CFG.tasa>0?` (${bsTxt(total)} a tasa ${fmtBs(CFG.tasa)})`:''}`;
   if(REF) t += `\n(ref: ${REF})`;
   track('pedido', CART.map(c=>c.sku+'x'+c.qty).join(' '));
@@ -2264,7 +2271,7 @@ function closeMini(id){ document.getElementById(id).classList.remove('open'); }
 document.querySelectorAll('.mini-modal').forEach(m=>m.addEventListener('click',e=>{ if(e.target===m || e.target.closest('[data-close]')) m.classList.remove('open'); }));
 document.addEventListener('keydown',e=>{ if(e.key==='Escape') document.querySelectorAll('.mini-modal.open').forEach(m=>m.classList.remove('open')); });
 function openAviso(p){
-  avisoProd=p; document.getElementById('aviso-prod').textContent = `${p.name} · está agotado por ahora. Déjanos tu WhatsApp y te escribimos apenas vuelva.`;
+  avisoProd=p; document.getElementById('aviso-prod').textContent = `${noTxt(p)}${p.name} · está agotado por ahora. Déjanos tu WhatsApp y te escribimos apenas vuelva.`;
   document.getElementById('aviso-form').reset();
   openMini('aviso'); setTimeout(()=>document.getElementById('av-nombre').focus(),50);
 }
@@ -2320,7 +2327,7 @@ document.getElementById('talla-go').onclick=()=>{ const cm=+document.getElementB
 /* ============ COMPARTIR UN RELOJ (queda registrado en la hoja) ============ */
 function shareLink(p){ return `${SITE_URL}?reloj=${encodeURIComponent(p.sku)}${REF?'&ref='+REF:''}`; }
 async function shareProduct(p){
-  const url = shareLink(p), text = `Mira este reloj: ${p.name} — ${p.price}`;
+  const url = shareLink(p), text = `Mira este reloj: ${noTxt(p)}${p.name} — ${p.price}`;
   track('compartir', p.sku);
   if(navigator.share){ try{ await navigator.share({title:'JhonClock', text, url}); }catch(e){} return; }
   try{ await navigator.clipboard.writeText(url); toast('Enlace copiado. Pégalo donde quieras.'); }
