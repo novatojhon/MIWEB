@@ -1751,7 +1751,7 @@ function filtered(){
     (!VIEW.size || (diam(p)>=VIEW.size[0] && diam(p)<=VIEW.size[1])) &&
     (VIEW.brand==='all' || p.catLabel===VIEW.brand) &&
     (VIEW.strap==='all' || strapOf(p)===VIEW.strap) &&
-    (!q || (qNum ? String(p.no)===String(+qNum) : norm([noTxt(p),p.name,p.catLabel,p.sub,p.sku,p.desc].join(' ')).includes(q))));
+    (!q || (qNum ? String(p.no)===String(+qNum) : norm([noTxt(p),p.name,p.modelo,p.catLabel,p.sub,p.sku,p.desc].join(' ')).includes(q))));
   if(VIEW.sort==='num') list.sort((a,b)=>((+a.p.no||1e9)-(+b.p.no||1e9)) || (a.i-b.i));
   if(VIEW.sort==='asc') list.sort((a,b)=>priceNum(a.p)-priceNum(b.p));
   if(VIEW.sort==='desc') list.sort((a,b)=>priceNum(b.p)-priceNum(a.p));
@@ -2088,9 +2088,16 @@ document.addEventListener('click', e=>{
   track(a.dataset.tipo || 'whatsapp', a.dataset.sku);
 }, true);
 
+// Marca + modelo sin repetir la marca: "Mini Focus" + "Minifocus MF0627G-01" → "Mini Focus MF0627G-01"
+function nombreReloj(marca, modelo){
+  const b=String(marca||'').trim(), m=String(modelo||'').trim(), w=m.split(/\s+/)[0]||'';
+  const sinEsp = t => t.toLowerCase().replace(/[^a-z0-9]/g,'');
+  if(b && w && sinEsp(w)===sinEsp(b)) return (b+' '+m.slice(w.length).trim()).trim();
+  return (b+' '+m).trim();
+}
 function mapRow(r){
   return {
-    no:r.no||'', sku:r.sku, img:r.foto, name:`${r.marca} ${r.modelo}`.replace(/^(\S+)\s+\1\b/i,'$1'), catLabel:r.marca, sub:r.correa,
+    no:r.no||'', sku:r.sku, img:r.foto, name:nombreReloj(r.marca, r.modelo), modelo:String(r.modelo||''), catLabel:r.marca, sub:r.correa,
     cat: /cuero|piel|acero|malla|brazalete|eslabones/i.test(r.correa) ? 'clasico' : 'deportivo',
     price:'$'+Math.round(r.precio), desc:r.descripcion, stock:r.stock, tagLabel: r.stock<=0 ? 'Agotado' : (r.stock<=2 ? 'Pocas unidades' : 'Disponible'),
     label:String(r.etiqueta||'').trim(),
